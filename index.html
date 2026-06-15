@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM CARE — El CRM para el sector sanitario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A2540;
+      --navy-light: #0d3060;
+      --blue: #2D7DD2;
+      --blue-light: #4a94e8;
+      --blue-pale: #e8f1fc;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-400: #94a3b8;
+      --gray-600: #475569;
+      --gray-800: #1e293b;
+      --green: #10b981;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,.15);
+      --transition: .3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITY ───────────────────────────────── */
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--gray-600);
+      max-width: 580px;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { margin: 0 auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,125,210,.4); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.5);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+    .btn-dark {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-dark:hover { background: var(--navy-light); transform: translateY(-2px); }
+
+    /* ── ANIMATIONS ────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── NAVBAR ────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(10,37,64,.97);
+      backdrop-filter: blur(12px);
+      padding: 14px 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,.3);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+    }
+    .nav-logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav-logo-text span { color: var(--blue-light); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy);
+      padding: 16px 24px 24px;
+    }
+    .mobile-menu a {
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .mobile-menu .btn { margin-top: 16px; text-align: center; justify-content: center; }
+
+    /* ── HERO ──────────────────────────────────── */
+    #hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d3565 60%, #1a4a7a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(45,125,210,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -15%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(45,125,210,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(45,125,210,.2);
+      border: 1px solid rgba(45,125,210,.4);
+      color: #7eb8f7;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero-badge i { font-size: 14px; color: var(--green); }
+    .hero-title {
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      margin-bottom: 20px;
+    }
+    .hero-title .accent { color: #7eb8f7; }
+    .hero-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.65;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .hero-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,.6);
+      margin-top: 4px;
+    }
+
+    /* Mockup */
+    .hero-mockup {
+      position: relative;
+    }
+    .mockup-window {
+      background: #0f1c2e;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 40px 100px rgba(0,0,0,.5);
+      overflow: hidden;
+    }
+    .mockup-bar {
+      background: #162035;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .mockup-dots { display: flex; gap: 6px; }
+    .mockup-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .mockup-dot:nth-child(1) { background: #ff5f57; }
+    .mockup-dot:nth-child(2) { background: #febc2e; }
+    .mockup-dot:nth-child(3) { background: #28c840; }
+    .mockup-url {
+      flex: 1;
+      background: rgba(255,255,255,.07);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+    }
+    .mockup-body { padding: 0; display: flex; height: 380px; }
+    .mockup-sidebar {
+      width: 56px;
+      background: #0d1e31;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 20px;
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .sidebar-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: rgba(255,255,255,.4);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .sidebar-icon.active {
+      background: var(--blue);
+      color: white;
+    }
+    .mockup-content { flex: 1; padding: 16px; overflow: hidden; }
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .mockup-title { font-size: 13px; font-weight: 700; color: white; }
+    .mockup-badge-green {
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(16,185,129,.2);
+      color: #34d399;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .mockup-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .mockup-card {
+      background: rgba(255,255,255,.05);
+      border-radius: 8px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .mc-label { font-size: 9px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .05em; }
+    .mc-value { font-size: 20px; font-weight: 800; color: white; margin: 2px 0; }
+    .mc-change { font-size: 10px; color: #34d399; }
+    .mockup-table { width: 100%; }
+    .mt-head {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .mt-head span { font-size: 9px; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .05em; }
+    .mt-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      align-items: center;
+    }
+    .mt-name { font-size: 11px; color: rgba(255,255,255,.8); font-weight: 500; }
+    .mt-date { font-size: 10px; color: rgba(255,255,255,.4); }
+    .mt-status {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-align: center;
+      display: inline-block;
+    }
+    .status-confirmed { background: rgba(16,185,129,.2); color: #34d399; }
+    .status-pending { background: rgba(251,191,36,.2); color: #fbbf24; }
+    .status-scheduled { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    .mockup-float {
+      position: absolute;
+      bottom: -20px;
+      right: -24px;
+      background: white;
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 200px;
+    }
+    .float-icon {
+      width: 40px; height: 40px;
+      background: rgba(16,185,129,.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--green);
+    }
+    .float-label { font-size: 11px; color: var(--gray-600); }
+    .float-value { font-size: 16px; font-weight: 800; color: var(--navy); }
+
+    /* ── TRUST LOGOS ──────────────────────────── */
+    #trust {
+      background: var(--gray-50);
+      padding: 48px 0;
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .trust-label {
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-400);
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .trust-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+    }
+    .trust-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .trust-logo:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+    .trust-logo i { font-size: 22px; color: var(--blue); }
+    .trust-logo-name {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-logo-name strong {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .trust-logo-name span {
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    /* ── PROBLEM / SOLUTION ──────────────────── */
+    #problem { background: var(--white); }
+    .ps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .ps-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ps-col-title.problem-title { color: #dc2626; }
+    .ps-col-title.solution-title { color: var(--green); }
+    .ps-item {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      transition: var(--transition);
+    }
+    .ps-item:hover { box-shadow: var(--shadow); }
+    .ps-item.problem { background: #fef2f2; border: 1px solid #fecaca; }
+    .ps-item.solution { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .ps-item-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .problem .ps-item-icon { background: #fee2e2; color: #dc2626; }
+    .solution .ps-item-icon { background: #dcfce7; color: #16a34a; }
+    .ps-item-text strong { font-size: 14px; color: var(--navy); display: block; margin-bottom: 4px; }
+    .ps-item-text p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+
+    /* ── FEATURES ────────────────────────────── */
+    #features { background: var(--gray-50); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--blue); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-pale);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .feature-title { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .feature-desc { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ── HOW IT WORKS ────────────────────────── */
+    #how { background: var(--navy); }
+    #how .section-title { color: var(--white); }
+    #how .section-subtitle { color: rgba(255,255,255,.65); }
+    #how .section-label { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 44px; left: calc(16.66% + 32px); right: calc(16.66% + 32px);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(45,125,210,.6) 0%, rgba(45,125,210,.6) 100%);
+      background-image: repeating-linear-gradient(90deg, rgba(45,125,210,.5) 0, rgba(45,125,210,.5) 8px, transparent 8px, transparent 16px);
+    }
+    .step-card {
+      text-align: center;
+      padding: 0 16px;
+    }
+    .step-num {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 8px rgba(45,125,210,.15);
+    }
+    .step-title { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+    .step-desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.65; }
+    .step-features {
+      list-style: none;
+      margin-top: 20px;
+      text-align: left;
+      display: inline-block;
+    }
+    .step-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 8px;
+    }
+    .step-features li i { color: var(--green); font-size: 14px; }
+
+    /* ── TESTIMONIALS ────────────────────────── */
+    #testimonials { background: var(--gray-50); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .testi-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--gray-200);
+      transition: var(--transition);
+      position: relative;
+    }
+    .testi-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .testi-quote {
+      font-size: 48px;
+      color: var(--blue);
+      line-height: .8;
+      font-family: Georgia, serif;
+      margin-bottom: 16px;
+    }
+    .testi-stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testi-text {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .testi-role { font-size: 12px; color: var(--gray-400); }
+
+    /* ── PRICING ─────────────────────────────── */
+    #pricing { background: var(--white); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .pricing-card {
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      border: 2px solid var(--gray-200);
+      position: relative;
+      transition: var(--transition);
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .pricing-card.popular {
+      border-color: var(--blue);
+      background: var(--navy);
+      transform: scale(1.04);
+    }
+    .pricing-card.popular:hover { transform: scale(1.04) translateY(-4px); }
+    .popular-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      letter-spacing: .04em;
+    }
+    .plan-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .pricing-card.popular .plan-name { color: #7eb8f7; }
+    .plan-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+    .pricing-card.popular .plan-desc { color: rgba(255,255,255,.55); }
+    .plan-price {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .plan-price-num {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .pricing-card.popular .plan-price-num { color: var(--white); }
+    .plan-price-cur { font-size: 22px; font-weight: 700; color: var(--navy); align-self: flex-start; padding-top: 8px; }
+    .pricing-card.popular .plan-price-cur { color: var(--white); }
+    .plan-price-period { font-size: 13px; color: var(--gray-400); margin-bottom: 2px; }
+    .pricing-card.popular .plan-price-period { color: rgba(255,255,255,.5); }
+    .plan-divider {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 24px 0;
+    }
+    .pricing-card.popular .plan-divider { border-color: rgba(255,255,255,.12); }
+    .plan-features { list-style: none; margin-bottom: 32px; }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-600);
+      padding: 7px 0;
+    }
+    .pricing-card.popular .plan-features li { color: rgba(255,255,255,.8); }
+    .plan-features li i { color: var(--green); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .plan-features li.disabled i { color: var(--gray-400); }
+    .plan-features li.disabled { color: var(--gray-400); }
+    .pricing-card.popular .plan-features li.disabled { color: rgba(255,255,255,.3); }
+    .plan-btn { width: 100%; justify-content: center; padding: 14px; }
+
+    /* ── CTA FINAL ───────────────────────────── */
+    #cta-final {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d3060 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(45,125,210,.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #cta-final .section-title { color: white; }
+    #cta-final .section-subtitle { color: rgba(255,255,255,.7); }
+    #cta-final .section-label { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    .cta-form-wrap {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 600px;
+      margin: 48px auto 0;
+      box-shadow: 0 40px 80px rgba(0,0,0,.3);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .form-group label span { color: #dc2626; }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--gray-800);
+      background: var(--gray-50);
+      transition: var(--transition);
+      outline: none;
+      appearance: none;
+    }
+    .form-control:focus { border-color: var(--blue); background: white; box-shadow: 0 0 0 4px rgba(45,125,210,.12); }
+    .form-control.error { border-color: #dc2626; }
+    .form-error {
+      font-size: 12px;
+      color: #dc2626;
+      margin-top: 4px;
+      display: none;
+    }
+    .form-error.show { display: block; }
+    .form-submit { width: 100%; justify-content: center; padding: 16px; font-size: 16px; margin-top: 8px; }
+    .form-privacy {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 14px;
+    }
+    .form-privacy a { color: var(--blue); }
+    .form-success {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+    .form-success-icon {
+      width: 72px; height: 72px;
+      background: rgba(16,185,129,.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      color: var(--green);
+    }
+    .form-success h3 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .form-success p { font-size: 15px; color: var(--gray-600); }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: #060f1a;
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.45);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+    .footer-social { display: flex; gap: 10px; margin-top: 24px; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.45);
+      font-size: 16px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-social a:hover { border-color: var(--blue); color: var(--blue-light); }
+    .footer-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color var(--transition); }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
+    .footer-cert {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,.3);
+    }
+    .footer-cert i { color: var(--green); font-size: 14px; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
+
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-subtitle { margin: 0 auto 40px; }
+      .hero-cta { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-mockup { display: none; }
+
+      .ps-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .pricing-card.popular { transform: scale(1); }
+      .pricing-card.popular:hover { transform: translateY(-4px); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .section { padding: 72px 0; }
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .trust-logos { gap: 8px; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .cta-form-wrap { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon"><i class="ti ti-heart-rate-monitor"></i></div>
+        <span class="nav-logo-text">CRM<span>CARE</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Características</a></li>
+        <li><a href="#how">Cómo funciona</a></li>
+        <li><a href="#testimonials">Testimonios</a></li>
+        <li><a href="#pricing">Precios</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#cta-final" class="btn btn-primary" style="padding:10px 20px;font-size:13px;">Solicitar demo <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Características</a>
+    <a href="#how">Cómo funciona</a>
+    <a href="#testimonials">Testimonios</a>
+    <a href="#pricing">Precios</a>
+    <a href="#cta-final" class="btn btn-primary">Solicitar demo gratuita</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content reveal-left">
+        <div class="hero-badge">
+          <i class="ti ti-shield-check"></i> Certificado LOPD/RGPD · Sector Sanitario
+        </div>
+        <h1 class="hero-title">
+          El CRM que tu<br />
+          centro sanitario<br />
+          <span class="accent">estaba esperando</span>
+        </h1>
+        <p class="hero-subtitle">
+          Gestiona pacientes, automatiza citas y mejora la experiencia asistencial. Diseñado para hospitales, clínicas y consultas médicas que quieren crecer sin perder el control.
+        </p>
+        <div class="hero-cta">
+          <a href="#cta-final" class="btn btn-primary" style="font-size:16px;padding:16px 32px;">
+            <i class="ti ti-calendar-event"></i> Solicitar demo gratuita
+          </a>
+          <a href="#how" class="btn btn-outline">
+            Ver cómo funciona <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">+400</div>
+            <div class="hero-stat-label">Centros activos</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">98%</div>
+            <div class="hero-stat-label">Satisfacción</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">-35%</div>
+            <div class="hero-stat-label">No-shows en citas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockup UI -->
+      <div class="hero-mockup reveal-right">
+        <div class="mockup-window">
+          <div class="mockup-bar">
+            <div class="mockup-dots">
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+            </div>
+            <div class="mockup-url">app.crmcare.es/dashboard</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-sidebar">
+              <div class="sidebar-icon active"><i class="ti ti-layout-dashboard"></i></div>
+              <div class="sidebar-icon"><i class="ti ti-users"></i></div>
+              <div class="sidebar-icon"><i class="ti ti-calendar"></i></div>
+              <div class="sidebar-icon"><i class="ti ti-message"></i></div>
+              <div class="sidebar-icon"><i class="ti ti-chart-bar"></i></div>
+              <div class="sidebar-icon" style="margin-top:auto"><i class="ti ti-settings"></i></div>
+            </div>
+            <div class="mockup-content">
+              <div class="mockup-header">
+                <span class="mockup-title">Dashboard — Junio 2026</span>
+                <span class="mockup-badge-green"><i class="ti ti-circle-filled" style="font-size:8px"></i> En vivo</span>
+              </div>
+              <div class="mockup-cards">
+                <div class="mockup-card">
+                  <div class="mc-label">Pacientes activos</div>
+                  <div class="mc-value">1.847</div>
+                  <div class="mc-change"><i class="ti ti-trending-up"></i> +12% este mes</div>
+                </div>
+                <div class="mockup-card">
+                  <div class="mc-label">Citas hoy</div>
+                  <div class="mc-value">34</div>
+                  <div class="mc-change"><i class="ti ti-check"></i> 28 confirmadas</div>
+                </div>
+              </div>
+              <div class="mockup-table">
+                <div class="mt-head">
+                  <span>Paciente</span><span>Próxima cita</span><span>Estado</span>
+                </div>
+                <div class="mt-row">
+                  <span class="mt-name">García Martínez, L.</span>
+                  <span class="mt-date">Hoy 10:30</span>
+                  <span class="mt-status status-confirmed">Confirmada</span>
+                </div>
+                <div class="mt-row">
+                  <span class="mt-name">Rodríguez Pérez, M.</span>
+                  <span class="mt-date">Hoy 11:00</span>
+                  <span class="mt-status status-pending">Pendiente</span>
+                </div>
+                <div class="mt-row">
+                  <span class="mt-name">López Sánchez, A.</span>
+                  <span class="mt-date">Mañana 09:15</span>
+                  <span class="mt-status status-scheduled">Agendada</span>
+                </div>
+                <div class="mt-row">
+                  <span class="mt-name">Fernández Ruiz, C.</span>
+                  <span class="mt-date">Mañana 10:00</span>
+                  <span class="mt-status status-confirmed">Confirmada</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-float">
+          <div class="float-icon"><i class="ti ti-trending-up"></i></div>
+          <div>
+            <div class="float-label">Reducción de no-shows</div>
+            <div class="float-value">−35% este trimestre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST LOGOS ═══════════════ -->
+<section id="trust">
+  <div class="container">
+    <p class="trust-label">Centros sanitarios que ya confían en CRM CARE</p>
+    <div class="trust-logos reveal">
+      <div class="trust-logo">
+        <i class="ti ti-building-hospital"></i>
+        <div class="trust-logo-name">
+          <strong>Hospital Universitario</strong>
+          <span>Montecasino · Madrid</span>
+        </div>
+      </div>
+      <div class="trust-logo">
+        <i class="ti ti-stethoscope"></i>
+        <div class="trust-logo-name">
+          <strong>Clínica Salud+</strong>
+          <span>Barcelona</span>
+        </div>
+      </div>
+      <div class="trust-logo">
+        <i class="ti ti-heart-rate-monitor"></i>
+        <div class="trust-logo-name">
+          <strong>Centro Médico Norte</strong>
+          <span>Bilbao</span>
+        </div>
+      </div>
+      <div class="trust-logo">
+        <i class="ti ti-building-community"></i>
+        <div class="trust-logo-name">
+          <strong>Policlínica Levante</strong>
+          <span>Valencia</span>
+        </div>
+      </div>
+      <div class="trust-logo">
+        <i class="ti ti-microscope"></i>
+        <div class="trust-logo-name">
+          <strong>IML Diagnósticos</strong>
+          <span>Sevilla</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROBLEMA / SOLUCIÓN ═══════════════ -->
+<section id="problem" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">El desafío sanitario</span>
+      <h2 class="section-title">¿Te suena familiar?</h2>
+      <p class="section-subtitle">La gestión de pacientes en centros sanitarios sigue llena de fricciones evitables. CRM CARE las elimina.</p>
+    </div>
+    <div class="ps-grid">
+      <div class="reveal-left">
+        <div class="ps-col-title problem-title">
+          <i class="ti ti-circle-x" style="font-size:18px"></i> Sin CRM CARE
+        </div>
+        <div class="ps-item problem">
+          <div class="ps-item-icon"><i class="ti ti-calendar-off"></i></div>
+          <div class="ps-item-text">
+            <strong>Agendas saturadas y confusas</strong>
+            <p>Hojas de cálculo, post-its y llamadas perdidas. Los pacientes esperan semanas sin respuesta.</p>
+          </div>
+        </div>
+        <div class="ps-item problem">
+          <div class="ps-item-icon"><i class="ti ti-folder-off"></i></div>
+          <div class="ps-item-text">
+            <strong>Expedientes dispersos</strong>
+            <p>La historia clínica está en papel, en diferentes sistemas o peor aún, desactualizada.</p>
+          </div>
+        </div>
+        <div class="ps-item problem">
+          <div class="ps-item-icon"><i class="ti ti-message-off"></i></div>
+          <div class="ps-item-text">
+            <strong>Comunicación reactiva</strong>
+            <p>Solo se contacta al paciente cuando llama. No hay seguimiento proactivo post-consulta.</p>
+          </div>
+        </div>
+        <div class="ps-item problem">
+          <div class="ps-item-icon"><i class="ti ti-chart-off"></i></div>
+          <div class="ps-item-text">
+            <strong>Sin visibilidad del negocio</strong>
+            <p>No sabes qué especialidades rinden más, ni cuántos pacientes no vuelven tras la primera visita.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="ps-col-title solution-title">
+          <i class="ti ti-circle-check" style="font-size:18px"></i> Con CRM CARE
+        </div>
+        <div class="ps-item solution">
+          <div class="ps-item-icon"><i class="ti ti-calendar-check"></i></div>
+          <div class="ps-item-text">
+            <strong>Agenda inteligente y automatizada</strong>
+            <p>Confirmaciones automáticas por WhatsApp, recordatorios 24h antes y cancelaciones gestionadas en tiempo real.</p>
+          </div>
+        </div>
+        <div class="ps-item solution">
+          <div class="ps-item-icon"><i class="ti ti-file-medical"></i></div>
+          <div class="ps-item-text">
+            <strong>Expediente digital centralizado</strong>
+            <p>Todo el historial del paciente en un clic: visitas, diagnósticos, documentos y consentimientos firmados.</p>
+          </div>
+        </div>
+        <div class="ps-item solution">
+          <div class="ps-item-icon"><i class="ti ti-send"></i></div>
+          <div class="ps-item-text">
+            <strong>Comunicación proactiva y multicanal</strong>
+            <p>Flujos automáticos de seguimiento post-consulta, campañas de revisión y recordatorios de tratamiento.</p>
+          </div>
+        </div>
+        <div class="ps-item solution">
+          <div class="ps-item-icon"><i class="ti ti-chart-arrows"></i></div>
+          <div class="ps-item-text">
+            <strong>Analítica en tiempo real</strong>
+            <p>Dashboards con KPIs clave: tasa de retención, ocupación por especialidad, ingresos y satisfacción del paciente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CARACTERÍSTICAS ═══════════════ -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Funcionalidades</span>
+      <h2 class="section-title">Todo lo que necesitas,<br />en una sola plataforma</h2>
+      <p class="section-subtitle">Diseñado específicamente para los flujos de trabajo de centros sanitarios. Sin funciones innecesarias, sin curva de aprendizaje.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal" style="transition-delay:.05s">
+        <div class="feature-icon"><i class="ti ti-users-group"></i></div>
+        <div class="feature-title">Gestión de pacientes y expedientes</div>
+        <div class="feature-desc">Ficha completa de cada paciente con historial clínico, documentos adjuntos, consentimientos digitales y alertas de seguimiento.</div>
+        <span class="feature-tag">Historia clínica digital</span>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.1s">
+        <div class="feature-icon"><i class="ti ti-calendar-time"></i></div>
+        <div class="feature-title">Agenda y citas automatizadas</div>
+        <div class="feature-desc">Reserva online 24/7, confirmaciones automáticas, recordatorios multicanal y gestión de cancelaciones y listas de espera.</div>
+        <span class="feature-tag">Reducción no-shows −35%</span>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.15s">
+        <div class="feature-icon"><i class="ti ti-activity-heartbeat"></i></div>
+        <div class="feature-title">Seguimiento post-consulta</div>
+        <div class="feature-desc">Flujos automáticos de seguimiento tras cada visita: encuestas de satisfacción, revisiones programadas y alertas de tratamiento.</div>
+        <span class="feature-tag">Fidelización del paciente</span>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.2s">
+        <div class="feature-icon"><i class="ti ti-device-mobile-message"></i></div>
+        <div class="feature-title">Comunicación multicanal</div>
+        <div class="feature-desc">WhatsApp Business, email personalizado, SMS y notificaciones push. Todos los canales centralizados en una bandeja unificada.</div>
+        <span class="feature-tag">WhatsApp · Email · SMS</span>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.25s">
+        <div class="feature-icon"><i class="ti ti-chart-histogram"></i></div>
+        <div class="feature-title">Informes y analíticas</div>
+        <div class="feature-desc">Dashboards personalizables con KPIs sanitarios: ocupación, ingresos por especialidad, NPS, tasa de retención y mucho más.</div>
+        <span class="feature-tag">Decisiones basadas en datos</span>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.3s">
+        <div class="feature-icon"><i class="ti ti-lock-check"></i></div>
+        <div class="feature-title">Cumplimiento LOPD/RGPD</div>
+        <div class="feature-desc">Consentimientos digitales, registro de accesos, cifrado end-to-end y gestión de derechos del paciente. Auditado por expertos en compliance sanitario.</div>
+        <span class="feature-tag">Certificado RGPD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CÓMO FUNCIONA ═══════════════ -->
+<section id="how" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Proceso</span>
+      <h2 class="section-title">En marcha en menos de 48 horas</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,.65)">Nuestro equipo de onboarding te acompaña en cada paso. Sin instalaciones, sin servidores propios.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal" style="transition-delay:.05s">
+        <div class="step-num">1</div>
+        <div class="step-title">Configura tu centro</div>
+        <div class="step-desc">Personalizamos CRM CARE con las especialidades, profesionales y flujos de trabajo de tu centro.</div>
+        <ul class="step-features">
+          <li><i class="ti ti-check"></i> Alta en menos de 1 hora</li>
+          <li><i class="ti ti-check"></i> Configuración guiada</li>
+          <li><i class="ti ti-check"></i> Sin necesidad de IT</li>
+        </ul>
+      </div>
+      <div class="step-card reveal" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <div class="step-title">Importa tus datos</div>
+        <div class="step-desc">Migramos tu base de pacientes desde cualquier sistema: Excel, Gestor Clínico, HIS o agenda de papel.</div>
+        <ul class="step-features">
+          <li><i class="ti ti-check"></i> Migración asistida</li>
+          <li><i class="ti ti-check"></i> Cero pérdida de datos</li>
+          <li><i class="ti ti-check"></i> Validación antes del paso a producción</li>
+        </ul>
+      </div>
+      <div class="step-card reveal" style="transition-delay:.15s">
+        <div class="step-num">3</div>
+        <div class="step-title">Empieza a gestionar</div>
+        <div class="step-desc">Tu equipo accede desde cualquier dispositivo. Formación en vivo incluida y soporte dedicado los primeros 30 días.</div>
+        <ul class="step-features">
+          <li><i class="ti ti-check"></i> App web y móvil</li>
+          <li><i class="ti ti-check"></i> Formación en vivo incluida</li>
+          <li><i class="ti ti-check"></i> Soporte 24/7 en español</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TESTIMONIOS ═══════════════ -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Testimonios</span>
+      <h2 class="section-title">Casos de éxito reales</h2>
+      <p class="section-subtitle">Directores médicos y administradores de centros sanitarios comparten su experiencia con CRM CARE.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal" style="transition-delay:.05s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Desde que implantamos CRM CARE, nuestras ausencias en consulta bajaron un 38%. El sistema de recordatorios por WhatsApp ha cambiado completamente la relación con nuestros pacientes. El ROI se vio en el primer trimestre.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#2D7DD2,#0A2540)">DM</div>
+          <div>
+            <div class="testi-name">Dra. Mercedes Villanueva</div>
+            <div class="testi-role">Directora Médica — Policlínica Levante, Valencia</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">La integración con WhatsApp y el módulo de analíticas nos dieron una visión que nunca habíamos tenido. Ahora sabemos exactamente qué especialidades están rindiendo y podemos tomar decisiones de contratación basadas en datos reales.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#059669,#0A2540)">RG</div>
+          <div>
+            <div class="testi-name">Roberto García Ibáñez</div>
+            <div class="testi-role">Director General — Hospital Universitario Montecasino</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.15s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">La implementación fue mucho más sencilla de lo esperado. En 48 horas el equipo ya estaba funcionando. El soporte en español y la formación personalizada marcaron la diferencia. Clínica Salud+ ha mejorado su NPS en 22 puntos.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#7c3aed,#0A2540)">LP</div>
+          <div>
+            <div class="testi-name">Laura Puig Castells</div>
+            <div class="testi-role">Administradora — Clínica Salud+, Barcelona</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Precios</span>
+      <h2 class="section-title">Planes adaptados a tu centro</h2>
+      <p class="section-subtitle">Sin permanencia. Sin costes ocultos. Cancela cuando quieras. Prueba gratuita 14 días en todos los planes.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- BÁSICO -->
+      <div class="pricing-card reveal" style="transition-delay:.05s">
+        <div class="plan-name">Básico</div>
+        <div class="plan-desc">Ideal para consultas y clínicas pequeñas</div>
+        <div class="plan-price">
+          <span class="plan-price-cur">€</span>
+          <span class="plan-price-num">79</span>
+        </div>
+        <div class="plan-price-period">/ mes · hasta 3 profesionales</div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><i class="ti ti-check"></i> Hasta 500 pacientes activos</li>
+          <li><i class="ti ti-check"></i> Agenda y citas online</li>
+          <li><i class="ti ti-check"></i> Recordatorios por email y SMS</li>
+          <li><i class="ti ti-check"></i> Expediente digital básico</li>
+          <li><i class="ti ti-check"></i> Soporte por email</li>
+          <li class="disabled"><i class="ti ti-x"></i> WhatsApp Business</li>
+          <li class="disabled"><i class="ti ti-x"></i> Analíticas avanzadas</li>
+          <li class="disabled"><i class="ti ti-x"></i> API e integraciones</li>
+        </ul>
+        <a href="#cta-final" class="btn btn-dark plan-btn">Empezar gratis 14 días</a>
+      </div>
+
+      <!-- PROFESIONAL (destacado) -->
+      <div class="pricing-card popular reveal" style="transition-delay:.1s">
+        <div class="popular-badge">⭐ Más popular</div>
+        <div class="plan-name">Profesional</div>
+        <div class="plan-desc" style="color:rgba(255,255,255,.5)">Para clínicas medianas en crecimiento</div>
+        <div class="plan-price">
+          <span class="plan-price-cur" style="color:white">€</span>
+          <span class="plan-price-num">199</span>
+        </div>
+        <div class="plan-price-period">/ mes · hasta 15 profesionales</div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><i class="ti ti-check"></i> Pacientes ilimitados</li>
+          <li><i class="ti ti-check"></i> Agenda multirecurso avanzada</li>
+          <li><i class="ti ti-check"></i> WhatsApp Business integrado</li>
+          <li><i class="ti ti-check"></i> Expediente digital completo</li>
+          <li><i class="ti ti-check"></i> Analíticas y dashboards</li>
+          <li><i class="ti ti-check"></i> Seguimiento post-consulta</li>
+          <li><i class="ti ti-check"></i> Soporte telefónico prioritario</li>
+          <li class="disabled"><i class="ti ti-x"></i> API personalizada</li>
+        </ul>
+        <a href="#cta-final" class="btn btn-primary plan-btn">Solicitar demo</a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="pricing-card reveal" style="transition-delay:.15s">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-desc">Para hospitales y grupos sanitarios</div>
+        <div class="plan-price">
+          <span class="plan-price-num" style="font-size:36px;color:var(--navy)">A medida</span>
+        </div>
+        <div class="plan-price-period">Contacta con nuestro equipo</div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><i class="ti ti-check"></i> Profesionales ilimitados</li>
+          <li><i class="ti ti-check"></i> Multi-sede y multi-especialidad</li>
+          <li><i class="ti ti-check"></i> API e integraciones HIS/HCE</li>
+          <li><i class="ti ti-check"></i> SSO / Active Directory</li>
+          <li><i class="ti ti-check"></i> Informes regulatorios automáticos</li>
+          <li><i class="ti ti-check"></i> SLA garantizado 99.9%</li>
+          <li><i class="ti ti-check"></i> Gestor de cuenta dedicado</li>
+          <li><i class="ti ti-check"></i> Implantación in-situ</li>
+        </ul>
+        <a href="#cta-final" class="btn btn-dark plan-btn">Hablar con ventas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA FINAL ═══════════════ -->
+<section id="cta-final" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Empieza hoy</span>
+      <h2 class="section-title">Tu centro sanitario<br />merece la mejor gestión</h2>
+      <p class="section-subtitle">Únete a más de 400 centros sanitarios que ya han transformado su gestión. Demo personalizada en 30 minutos, sin compromiso.</p>
+    </div>
+
+    <div class="cta-form-wrap reveal">
+      <div id="formContent">
+        <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px;text-align:center">Solicita tu demo gratuita</h3>
+        <p style="font-size:14px;color:var(--gray-400);text-align:center;margin-bottom:28px">Te contactamos en menos de 2 horas en horario laboral</p>
+        <form id="demoForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre y apellidos <span>*</span></label>
+              <input type="text" class="form-control" id="fname" placeholder="Ej: Ana García López" />
+              <div class="form-error" id="err-fname">Por favor, introduce tu nombre completo</div>
+            </div>
+            <div class="form-group">
+              <label>Email profesional <span>*</span></label>
+              <input type="email" class="form-control" id="femail" placeholder="ana@clinica.es" />
+              <div class="form-error" id="err-femail">Introduce un email válido</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Teléfono <span>*</span></label>
+              <input type="tel" class="form-control" id="fphone" placeholder="+34 600 000 000" />
+              <div class="form-error" id="err-fphone">Introduce un teléfono válido</div>
+            </div>
+            <div class="form-group">
+              <label>Tipo de centro <span>*</span></label>
+              <select class="form-control" id="ftype">
+                <option value="">Selecciona una opción</option>
+                <option value="hospital">Hospital</option>
+                <option value="clinica">Clínica privada</option>
+                <option value="consulta">Consulta médica</option>
+                <option value="centro-salud">Centro de salud</option>
+                <option value="dental">Clínica dental</option>
+                <option value="otro">Otro</option>
+              </select>
+              <div class="form-error" id="err-ftype">Selecciona el tipo de centro</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            <i class="ti ti-calendar-event"></i> Reservar demo gratuita
+          </button>
+          <p class="form-privacy">
+            Al enviar este formulario aceptas nuestra <a href="#">Política de privacidad</a>.
+            Tus datos están protegidos bajo la normativa RGPD.
+          </p>
+        </form>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon"><i class="ti ti-circle-check"></i></div>
+        <h3>¡Solicitud recibida!</h3>
+        <p>Nuestro equipo te contactará en menos de 2 horas para coordinar tu demo personalizada. Revisa tu bandeja de entrada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="nav-logo" style="text-decoration:none">
+          <div class="nav-logo-icon"><i class="ti ti-heart-rate-monitor"></i></div>
+          <span class="nav-logo-text">CRM<span>CARE</span></span>
+        </a>
+        <p class="footer-brand-desc">El CRM especializado para el sector sanitario. Ayudamos a hospitales, clínicas y consultas a gestionar mejor, fidelizar pacientes y crecer de forma sostenible.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="ti ti-brand-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="ti ti-brand-youtube"></i></a>
+          <a href="#" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Producto</div>
+        <ul class="footer-links">
+          <li><a href="#features">Características</a></li>
+          <li><a href="#pricing">Precios</a></li>
+          <li><a href="#">Integraciones</a></li>
+          <li><a href="#">Novedades</a></li>
+          <li><a href="#">Hoja de ruta</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Blog sanitario</a></li>
+          <li><a href="#">Casos de éxito</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Soporte</div>
+        <ul class="footer-links">
+          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Documentación API</a></li>
+          <li><a href="#">Estado del sistema</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#cta-final">Solicitar demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 CRM CARE. Todos los derechos reservados.</div>
+      <div class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Cookies</a>
+        <a href="#">RGPD</a>
+      </div>
+      <div class="footer-cert">
+        <i class="ti ti-shield-check"></i> Certificado LOPD/RGPD · ENS Medio
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── NAVBAR scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── MOBILE MENU
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // ── INTERSECTION OBSERVER — reveal animations
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── SMOOTH SCROLL for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ── FORM VALIDATION
+  const form = document.getElementById('demoForm');
+  const formContent = document.getElementById('formContent');
+  const formSuccess = document.getElementById('formSuccess');
+
+  function showError(id, show) {
+    const el = document.getElementById('err-' + id);
+    const input = document.getElementById('f' + id);
+    if (!el || !input) return;
+    el.classList.toggle('show', show);
+    input.classList.toggle('error', show);
+  }
+
+  function validateEmail(val) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  }
+
+  function validatePhone(val) {
+    return /^[+]?[\d\s\-().]{7,}$/.test(val.trim());
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let valid = true;
+
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const type = document.getElementById('ftype').value;
+
+    if (name.length < 3) { showError('name', true); valid = false; } else showError('name', false);
+    if (!validateEmail(email)) { showError('email', true); valid = false; } else showError('email', false);
+    if (!validatePhone(phone)) { showError('phone', true); valid = false; } else showError('phone', false);
+    if (!type) { showError('type', true); valid = false; } else showError('type', false);
+
+    if (valid) {
+      formContent.style.display = 'none';
+      formSuccess.style.display = 'block';
+    }
+  });
+
+  // Clear errors on input
+  ['fname','femail','fphone','ftype'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => {
+      el.classList.remove('error');
+      const errKey = id.replace('f','');
+      const errEl = document.getElementById('err-' + errKey);
+      if (errEl) errEl.classList.remove('show');
+    });
+  });
+</script>
+</body>
+</html>
