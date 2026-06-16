@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRM CARE — El CRM para el sector sanitario</title>
+  <title>Aprendientes — Aprende a aprender de verdad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -12,24 +12,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0A2540;
-      --navy-light: #0d3060;
-      --blue: #2D7DD2;
-      --blue-light: #4a94e8;
-      --blue-pale: #e8f1fc;
-      --white: #ffffff;
-      --gray-50: #f8fafc;
-      --gray-100: #f1f5f9;
-      --gray-200: #e2e8f0;
-      --gray-400: #94a3b8;
-      --gray-600: #475569;
-      --gray-800: #1e293b;
+      --navy: #0f0e1a;
+      --navy-light: #1e1b4b;
+      --blue: #6366f1;
+      --blue-light: #818cf8;
+      --blue-pale: rgba(99,102,241,.15);
+      --white: #e0e7ff;
+      --accent: #f97316;
+      --gray-50: #13111f;
+      --gray-100: #1a1730;
+      --gray-200: rgba(255,255,255,.1);
+      --gray-400: #a5b4fc;
+      --gray-600: #c4b5fd;
+      --gray-800: #e0e7ff;
       --green: #10b981;
       --radius: 12px;
       --radius-lg: 20px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-      --shadow: 0 4px 16px rgba(0,0,0,.10);
-      --shadow-lg: 0 20px 60px rgba(0,0,0,.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.15);
+      --shadow: 0 4px 16px rgba(0,0,0,.3);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
       --transition: .3s ease;
     }
 
@@ -38,7 +39,7 @@
     body {
       font-family: 'Inter', sans-serif;
       color: var(--gray-800);
-      background: var(--white);
+      background: var(--navy);
       line-height: 1.6;
       overflow-x: hidden;
     }
@@ -53,7 +54,7 @@
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--blue-light);
       background: var(--blue-pale);
       padding: 4px 14px;
       border-radius: 999px;
@@ -62,13 +63,13 @@
     .section-title {
       font-size: clamp(28px, 4vw, 44px);
       font-weight: 800;
-      color: var(--navy);
+      color: var(--white);
       line-height: 1.15;
       margin-bottom: 16px;
     }
     .section-subtitle {
       font-size: 18px;
-      color: var(--gray-600);
+      color: var(--gray-400);
       max-width: 580px;
     }
     .text-center { text-align: center; }
@@ -91,18 +92,19 @@
       background: var(--blue);
       color: var(--white);
     }
-    .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,125,210,.4); }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,.4); }
     .btn-outline {
       background: transparent;
       color: var(--white);
-      border: 2px solid rgba(255,255,255,.5);
+      border: 2px solid rgba(255,255,255,.4);
     }
-    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
     .btn-dark {
-      background: var(--navy);
+      background: var(--navy-light);
       color: var(--white);
+      border: 1px solid rgba(255,255,255,.1);
     }
-    .btn-dark:hover { background: var(--navy-light); transform: translateY(-2px); }
+    .btn-dark:hover { background: rgba(99,102,241,.2); transform: translateY(-2px); border-color: var(--blue); }
 
     /* ── ANIMATIONS ────────────────────────────── */
     .reveal {
@@ -125,10 +127,10 @@
       transition: var(--transition);
     }
     #navbar.scrolled {
-      background: rgba(10,37,64,.97);
+      background: rgba(15,14,26,.97);
       backdrop-filter: blur(12px);
       padding: 14px 0;
-      box-shadow: 0 2px 20px rgba(0,0,0,.3);
+      box-shadow: 0 2px 20px rgba(0,0,0,.4);
     }
     .nav-inner {
       display: flex;
@@ -143,22 +145,30 @@
       text-decoration: none;
     }
     .nav-logo-icon {
-      width: 36px; height: 36px;
-      background: var(--blue);
-      border-radius: 8px;
+      width: 40px; height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      color: white;
+      flex-shrink: 0;
     }
+    .nav-logo-texts { display: flex; flex-direction: column; }
     .nav-logo-text {
+      font-family: Georgia, serif;
       font-size: 20px;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -.02em;
+      font-weight: 700;
+      color: #e0e7ff;
+      line-height: 1;
+      letter-spacing: 0;
     }
-    .nav-logo-text span { color: var(--blue-light); }
+    .nav-logo-sub {
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #f97316;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 3px;
+      line-height: 1;
+    }
     .nav-links {
       display: flex;
       align-items: center;
@@ -195,7 +205,7 @@
       display: none;
       flex-direction: column;
       gap: 0;
-      background: var(--navy);
+      background: var(--navy-light);
       padding: 16px 24px 24px;
     }
     .mobile-menu a {
@@ -210,7 +220,7 @@
 
     /* ── HERO ──────────────────────────────────── */
     #hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #0d3565 60%, #1a4a7a 100%);
+      background: linear-gradient(135deg, #0f0e1a 0%, #1a1735 60%, #2d2b6b 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -223,7 +233,7 @@
       position: absolute;
       top: -20%; right: -10%;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(45,125,210,.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(99,102,241,.25) 0%, transparent 70%);
       pointer-events: none;
     }
     #hero::after {
@@ -231,7 +241,7 @@
       position: absolute;
       bottom: -15%; left: -5%;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(45,125,210,.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(99,102,241,.12) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-inner {
@@ -246,16 +256,16 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(45,125,210,.2);
-      border: 1px solid rgba(45,125,210,.4);
-      color: #7eb8f7;
+      background: rgba(99,102,241,.15);
+      border: 1px solid rgba(99,102,241,.4);
+      color: #a5b4fc;
       font-size: 13px;
       font-weight: 600;
       padding: 6px 14px;
       border-radius: 999px;
       margin-bottom: 24px;
     }
-    .hero-badge i { font-size: 14px; color: var(--green); }
+    .hero-badge i { font-size: 14px; color: var(--accent); }
     .hero-title {
       font-size: clamp(34px, 5vw, 58px);
       font-weight: 900;
@@ -264,10 +274,10 @@
       letter-spacing: -.03em;
       margin-bottom: 20px;
     }
-    .hero-title .accent { color: #7eb8f7; }
+    .hero-title .accent { color: #f97316; }
     .hero-subtitle {
       font-size: 18px;
-      color: rgba(255,255,255,.75);
+      color: rgba(255,255,255,.7);
       line-height: 1.65;
       margin-bottom: 40px;
       max-width: 480px;
@@ -278,7 +288,7 @@
       gap: 40px;
       margin-top: 52px;
       padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,.12);
+      border-top: 1px solid rgba(255,255,255,.1);
     }
     .hero-stat-num {
       font-size: 28px;
@@ -288,23 +298,21 @@
     }
     .hero-stat-label {
       font-size: 13px;
-      color: rgba(255,255,255,.6);
+      color: rgba(255,255,255,.55);
       margin-top: 4px;
     }
 
-    /* Mockup */
-    .hero-mockup {
-      position: relative;
-    }
+    /* Course cards mockup */
+    .hero-mockup { position: relative; }
     .mockup-window {
-      background: #0f1c2e;
+      background: #12102a;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.08);
       box-shadow: 0 40px 100px rgba(0,0,0,.5);
       overflow: hidden;
     }
     .mockup-bar {
-      background: #162035;
+      background: #1a1735;
       padding: 12px 16px;
       display: flex;
       align-items: center;
@@ -312,109 +320,51 @@
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .mockup-dots { display: flex; gap: 6px; }
-    .mockup-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
+    .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
     .mockup-dot:nth-child(1) { background: #ff5f57; }
     .mockup-dot:nth-child(2) { background: #febc2e; }
     .mockup-dot:nth-child(3) { background: #28c840; }
     .mockup-url {
       flex: 1;
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.06);
       border-radius: 6px;
       padding: 5px 12px;
       font-size: 12px;
-      color: rgba(255,255,255,.4);
+      color: rgba(255,255,255,.35);
     }
-    .mockup-body { padding: 0; display: flex; height: 380px; }
-    .mockup-sidebar {
-      width: 56px;
-      background: #0d1e31;
+    .mockup-courses { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .course-preview {
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.2);
+      border-radius: 12px;
+      padding: 14px 16px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 16px 0;
-      gap: 20px;
-      border-right: 1px solid rgba(255,255,255,.06);
+      gap: 14px;
+      transition: var(--transition);
     }
-    .sidebar-icon {
-      width: 32px; height: 32px;
-      border-radius: 8px;
+    .course-preview:hover { border-color: rgba(99,102,241,.5); background: rgba(99,102,241,.15); }
+    .course-preview-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      color: rgba(255,255,255,.4);
-      cursor: pointer;
-      transition: var(--transition);
+      flex-shrink: 0;
+      font-size: 22px;
     }
-    .sidebar-icon.active {
-      background: var(--blue);
-      color: white;
-    }
-    .mockup-content { flex: 1; padding: 16px; overflow: hidden; }
-    .mockup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-    .mockup-title { font-size: 13px; font-weight: 700; color: white; }
-    .mockup-badge-green {
-      font-size: 10px;
-      font-weight: 600;
-      background: rgba(16,185,129,.2);
-      color: #34d399;
-      padding: 2px 8px;
-      border-radius: 999px;
-    }
-    .mockup-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .mockup-card {
-      background: rgba(255,255,255,.05);
-      border-radius: 8px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .mc-label { font-size: 9px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .05em; }
-    .mc-value { font-size: 20px; font-weight: 800; color: white; margin: 2px 0; }
-    .mc-change { font-size: 10px; color: #34d399; }
-    .mockup-table { width: 100%; }
-    .mt-head {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      padding: 6px 8px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .mt-head span { font-size: 9px; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .05em; }
-    .mt-row {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      padding: 8px 8px;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      align-items: center;
-    }
-    .mt-name { font-size: 11px; color: rgba(255,255,255,.8); font-weight: 500; }
-    .mt-date { font-size: 10px; color: rgba(255,255,255,.4); }
-    .mt-status {
-      font-size: 9px;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-align: center;
-      display: inline-block;
-    }
-    .status-confirmed { background: rgba(16,185,129,.2); color: #34d399; }
-    .status-pending { background: rgba(251,191,36,.2); color: #fbbf24; }
-    .status-scheduled { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    .course-preview-info { flex: 1; min-width: 0; }
+    .course-preview-title { font-size: 12px; font-weight: 700; color: #e0e7ff; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .course-preview-meta { font-size: 10px; color: #a5b4fc; }
+    .course-preview-price { font-size: 12px; font-weight: 700; color: #f97316; flex-shrink: 0; }
     .mockup-float {
       position: absolute;
-      bottom: -20px;
-      right: -24px;
-      background: white;
+      bottom: -20px; right: -24px;
+      background: #1e1b4b;
+      border: 1px solid rgba(99,102,241,.3);
       border-radius: 14px;
       padding: 14px 18px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
       display: flex;
       align-items: center;
       gap: 12px;
@@ -422,23 +372,21 @@
     }
     .float-icon {
       width: 40px; height: 40px;
-      background: rgba(16,185,129,.12);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      color: var(--green);
     }
-    .float-label { font-size: 11px; color: var(--gray-600); }
-    .float-value { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .float-label { font-size: 11px; color: #a5b4fc; }
+    .float-value { font-size: 16px; font-weight: 800; color: #e0e7ff; }
 
-    /* ── TRUST LOGOS ──────────────────────────── */
+    /* ── TRUST ──────────────────────────── */
     #trust {
-      background: var(--gray-50);
+      background: #0a0918;
       padding: 48px 0;
-      border-top: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .trust-label {
       text-align: center;
@@ -454,37 +402,27 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px 32px;
+      gap: 12px;
     }
-    .trust-logo {
+    .trust-tag {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
-      background: white;
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      text-decoration: none;
+      padding: 10px 24px;
+      background: var(--navy-light);
+      border: 1px solid rgba(99,102,241,.25);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue-light);
       transition: var(--transition);
+      cursor: default;
     }
-    .trust-logo:hover { border-color: var(--blue); box-shadow: var(--shadow); }
-    .trust-logo i { font-size: 22px; color: var(--blue); }
-    .trust-logo-name {
-      display: flex;
-      flex-direction: column;
-    }
-    .trust-logo-name strong {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-    .trust-logo-name span {
-      font-size: 10px;
-      color: var(--gray-400);
-    }
+    .trust-tag:hover { border-color: var(--blue); background: rgba(99,102,241,.15); }
+    .trust-tag i { font-size: 18px; color: var(--accent); }
 
     /* ── PROBLEM / SOLUTION ──────────────────── */
-    #problem { background: var(--white); }
+    #problem { background: var(--navy); }
     .ps-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -502,8 +440,8 @@
       align-items: center;
       gap: 8px;
     }
-    .ps-col-title.problem-title { color: #dc2626; }
-    .ps-col-title.solution-title { color: var(--green); }
+    .ps-col-title.problem-title { color: #f87171; }
+    .ps-col-title.solution-title { color: #34d399; }
     .ps-item {
       display: flex;
       gap: 14px;
@@ -512,9 +450,9 @@
       margin-bottom: 12px;
       transition: var(--transition);
     }
-    .ps-item:hover { box-shadow: var(--shadow); }
-    .ps-item.problem { background: #fef2f2; border: 1px solid #fecaca; }
-    .ps-item.solution { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .ps-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+    .ps-item.problem { background: rgba(220,38,38,.08); border: 1px solid rgba(220,38,38,.2); }
+    .ps-item.solution { background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.2); }
     .ps-item-icon {
       width: 36px; height: 36px;
       border-radius: 8px;
@@ -524,10 +462,10 @@
       font-size: 18px;
       flex-shrink: 0;
     }
-    .problem .ps-item-icon { background: #fee2e2; color: #dc2626; }
-    .solution .ps-item-icon { background: #dcfce7; color: #16a34a; }
-    .ps-item-text strong { font-size: 14px; color: var(--navy); display: block; margin-bottom: 4px; }
-    .ps-item-text p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+    .problem .ps-item-icon { background: rgba(220,38,38,.15); color: #f87171; }
+    .solution .ps-item-icon { background: rgba(16,185,129,.15); color: #34d399; }
+    .ps-item-text strong { font-size: 14px; color: var(--white); display: block; margin-bottom: 4px; }
+    .ps-item-text p { font-size: 13px; color: var(--gray-400); line-height: 1.5; }
 
     /* ── FEATURES ────────────────────────────── */
     #features { background: var(--gray-50); }
@@ -538,8 +476,8 @@
       margin-top: 56px;
     }
     .feature-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,.07);
       border-radius: var(--radius-lg);
       padding: 32px 28px;
       transition: var(--transition);
@@ -556,7 +494,7 @@
       transform-origin: left;
       transition: transform .3s ease;
     }
-    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--blue); }
+    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: rgba(99,102,241,.4); }
     .feature-card:hover::before { transform: scaleX(1); }
     .feature-icon {
       width: 52px; height: 52px;
@@ -566,27 +504,27 @@
       align-items: center;
       justify-content: center;
       font-size: 26px;
-      color: var(--blue);
+      color: var(--blue-light);
       margin-bottom: 20px;
     }
-    .feature-title { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-    .feature-desc { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+    .feature-title { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .feature-desc { font-size: 14px; color: var(--gray-400); line-height: 1.6; }
     .feature-tag {
       display: inline-block;
       margin-top: 16px;
       font-size: 11px;
       font-weight: 600;
-      color: var(--blue);
+      color: var(--blue-light);
       background: var(--blue-pale);
       padding: 3px 10px;
       border-radius: 999px;
     }
 
     /* ── HOW IT WORKS ────────────────────────── */
-    #how { background: var(--navy); }
+    #how { background: var(--navy-light); }
     #how .section-title { color: var(--white); }
-    #how .section-subtitle { color: rgba(255,255,255,.65); }
-    #how .section-label { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    #how .section-subtitle { color: rgba(255,255,255,.6); }
+    #how .section-label { background: rgba(99,102,241,.2); color: #a5b4fc; }
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -599,13 +537,9 @@
       position: absolute;
       top: 44px; left: calc(16.66% + 32px); right: calc(16.66% + 32px);
       height: 2px;
-      background: linear-gradient(90deg, rgba(45,125,210,.6) 0%, rgba(45,125,210,.6) 100%);
-      background-image: repeating-linear-gradient(90deg, rgba(45,125,210,.5) 0, rgba(45,125,210,.5) 8px, transparent 8px, transparent 16px);
+      background-image: repeating-linear-gradient(90deg, rgba(99,102,241,.5) 0, rgba(99,102,241,.5) 8px, transparent 8px, transparent 16px);
     }
-    .step-card {
-      text-align: center;
-      padding: 0 16px;
-    }
+    .step-card { text-align: center; padding: 0 16px; }
     .step-num {
       width: 80px; height: 80px;
       border-radius: 50%;
@@ -619,7 +553,7 @@
       color: white;
       position: relative;
       z-index: 1;
-      box-shadow: 0 0 0 8px rgba(45,125,210,.15);
+      box-shadow: 0 0 0 8px rgba(99,102,241,.15);
     }
     .step-title { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
     .step-desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.65; }
@@ -648,14 +582,14 @@
       margin-top: 56px;
     }
     .testi-card {
-      background: var(--white);
+      background: var(--navy-light);
       border-radius: var(--radius-lg);
       padding: 32px;
-      border: 1px solid var(--gray-200);
+      border: 1px solid rgba(255,255,255,.07);
       transition: var(--transition);
       position: relative;
     }
-    .testi-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .testi-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: rgba(99,102,241,.3); }
     .testi-quote {
       font-size: 48px;
       color: var(--blue);
@@ -666,7 +600,7 @@
     .testi-stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
     .testi-text {
       font-size: 15px;
-      color: var(--gray-600);
+      color: var(--gray-400);
       line-height: 1.7;
       margin-bottom: 24px;
       font-style: italic;
@@ -683,11 +617,11 @@
       color: white;
       flex-shrink: 0;
     }
-    .testi-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--white); }
     .testi-role { font-size: 12px; color: var(--gray-400); }
 
     /* ── PRICING ─────────────────────────────── */
-    #pricing { background: var(--white); }
+    #pricing { background: var(--navy); }
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -698,14 +632,15 @@
     .pricing-card {
       border-radius: var(--radius-lg);
       padding: 36px 32px;
-      border: 2px solid var(--gray-200);
+      border: 2px solid rgba(255,255,255,.08);
+      background: var(--navy-light);
       position: relative;
       transition: var(--transition);
     }
     .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     .pricing-card.popular {
       border-color: var(--blue);
-      background: var(--navy);
+      background: #2d2b6b;
       transform: scale(1.04);
     }
     .pricing-card.popular:hover { transform: scale(1.04) translateY(-4px); }
@@ -727,10 +662,9 @@
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--blue-light);
       margin-bottom: 8px;
     }
-    .pricing-card.popular .plan-name { color: #7eb8f7; }
     .plan-desc {
       font-size: 13px;
       color: var(--gray-400);
@@ -746,39 +680,34 @@
     .plan-price-num {
       font-size: 48px;
       font-weight: 900;
-      color: var(--navy);
+      color: var(--white);
       line-height: 1;
     }
-    .pricing-card.popular .plan-price-num { color: var(--white); }
-    .plan-price-cur { font-size: 22px; font-weight: 700; color: var(--navy); align-self: flex-start; padding-top: 8px; }
-    .pricing-card.popular .plan-price-cur { color: var(--white); }
+    .plan-price-cur { font-size: 22px; font-weight: 700; color: var(--white); align-self: flex-start; padding-top: 8px; }
     .plan-price-period { font-size: 13px; color: var(--gray-400); margin-bottom: 2px; }
-    .pricing-card.popular .plan-price-period { color: rgba(255,255,255,.5); }
     .plan-divider {
       border: none;
-      border-top: 1px solid var(--gray-200);
+      border-top: 1px solid rgba(255,255,255,.1);
       margin: 24px 0;
     }
-    .pricing-card.popular .plan-divider { border-color: rgba(255,255,255,.12); }
     .plan-features { list-style: none; margin-bottom: 32px; }
     .plan-features li {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       font-size: 14px;
-      color: var(--gray-600);
+      color: var(--gray-400);
       padding: 7px 0;
     }
     .pricing-card.popular .plan-features li { color: rgba(255,255,255,.8); }
     .plan-features li i { color: var(--green); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .plan-features li.disabled i { color: var(--gray-400); }
-    .plan-features li.disabled { color: var(--gray-400); }
-    .pricing-card.popular .plan-features li.disabled { color: rgba(255,255,255,.3); }
+    .plan-features li.disabled i { color: rgba(255,255,255,.2); }
+    .plan-features li.disabled { color: rgba(255,255,255,.25); }
     .plan-btn { width: 100%; justify-content: center; padding: 14px; }
 
     /* ── CTA FINAL ───────────────────────────── */
     #cta-final {
-      background: linear-gradient(135deg, var(--navy) 0%, #0d3060 100%);
+      background: linear-gradient(135deg, #0f0e1a 0%, #1e1b4b 100%);
       position: relative;
       overflow: hidden;
     }
@@ -787,60 +716,62 @@
       position: absolute;
       top: -50%; right: -10%;
       width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(45,125,210,.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(99,102,241,.2) 0%, transparent 70%);
       pointer-events: none;
     }
     #cta-final .section-title { color: white; }
-    #cta-final .section-subtitle { color: rgba(255,255,255,.7); }
-    #cta-final .section-label { background: rgba(45,125,210,.2); color: #7eb8f7; }
+    #cta-final .section-subtitle { color: rgba(255,255,255,.65); }
+    #cta-final .section-label { background: rgba(99,102,241,.2); color: #a5b4fc; }
     .cta-form-wrap {
-      background: white;
+      background: var(--navy-light);
+      border: 1px solid rgba(99,102,241,.2);
       border-radius: var(--radius-lg);
       padding: 40px;
-      max-width: 600px;
+      max-width: 520px;
       margin: 48px auto 0;
-      box-shadow: 0 40px 80px rgba(0,0,0,.3);
+      box-shadow: 0 40px 80px rgba(0,0,0,.4);
     }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 16px; }
     .form-group label {
       display: block;
       font-size: 13px;
       font-weight: 600;
-      color: var(--navy);
+      color: var(--white);
       margin-bottom: 6px;
     }
-    .form-group label span { color: #dc2626; }
+    .form-group label span { color: var(--accent); }
     .form-control {
       width: 100%;
       padding: 12px 16px;
-      border: 2px solid var(--gray-200);
+      border: 2px solid rgba(255,255,255,.1);
       border-radius: 10px;
       font-family: 'Inter', sans-serif;
       font-size: 14px;
-      color: var(--gray-800);
-      background: var(--gray-50);
+      color: var(--white);
+      background: rgba(255,255,255,.05);
       transition: var(--transition);
       outline: none;
       appearance: none;
     }
-    .form-control:focus { border-color: var(--blue); background: white; box-shadow: 0 0 0 4px rgba(45,125,210,.12); }
-    .form-control.error { border-color: #dc2626; }
+    .form-control::placeholder { color: rgba(255,255,255,.3); }
+    .form-control:focus { border-color: var(--blue); background: rgba(99,102,241,.08); box-shadow: 0 0 0 4px rgba(99,102,241,.15); }
+    .form-control.error { border-color: #f87171; }
     .form-error {
       font-size: 12px;
-      color: #dc2626;
+      color: #f87171;
       margin-top: 4px;
       display: none;
     }
     .form-error.show { display: block; }
-    .form-submit { width: 100%; justify-content: center; padding: 16px; font-size: 16px; margin-top: 8px; }
+    .form-submit { width: 100%; justify-content: center; padding: 16px; font-size: 16px; margin-top: 8px; background: var(--accent); }
+    .form-submit:hover { background: #fb923c; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(249,115,22,.4); }
     .form-privacy {
       text-align: center;
       font-size: 12px;
       color: var(--gray-400);
       margin-top: 14px;
     }
-    .form-privacy a { color: var(--blue); }
+    .form-privacy a { color: var(--blue-light); }
     .form-success {
       text-align: center;
       padding: 40px 20px;
@@ -857,12 +788,12 @@
       font-size: 36px;
       color: var(--green);
     }
-    .form-success h3 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .form-success p { font-size: 15px; color: var(--gray-600); }
+    .form-success h3 { font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+    .form-success p { font-size: 15px; color: var(--gray-400); }
 
     /* ── FOOTER ──────────────────────────────── */
     footer {
-      background: #060f1a;
+      background: #080614;
       padding: 64px 0 32px;
     }
     .footer-grid {
@@ -873,7 +804,7 @@
     }
     .footer-brand-desc {
       font-size: 14px;
-      color: rgba(255,255,255,.45);
+      color: rgba(255,255,255,.4);
       line-height: 1.7;
       margin-top: 16px;
       max-width: 280px;
@@ -882,11 +813,11 @@
     .footer-social a {
       width: 36px; height: 36px;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,.45);
+      color: rgba(255,255,255,.4);
       font-size: 16px;
       text-decoration: none;
       transition: var(--transition);
@@ -897,19 +828,19 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
-      color: rgba(255,255,255,.35);
+      color: rgba(255,255,255,.3);
       margin-bottom: 20px;
     }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links a {
       font-size: 14px;
-      color: rgba(255,255,255,.55);
+      color: rgba(255,255,255,.5);
       text-decoration: none;
       transition: color var(--transition);
     }
     .footer-links a:hover { color: var(--white); }
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.08);
+      border-top: 1px solid rgba(255,255,255,.07);
       padding-top: 28px;
       display: flex;
       align-items: center;
@@ -954,7 +885,6 @@
       .pricing-card.popular { transform: scale(1); }
       .pricing-card.popular:hover { transform: translateY(-4px); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .form-row { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 560px) {
@@ -975,17 +905,29 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon"><i class="ti ti-heart-rate-monitor"></i></div>
-        <span class="nav-logo-text">CRM<span>CARE</span></span>
+        <div class="nav-logo-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 8C17 8 14.5 10 13 12.5c-1 1.5-1.5 3.2-1.5 5 0 2.2.8 4.2 2.2 5.6L13 30h7V8h0z" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M20 8C23 8 25.5 10 27 12.5c1 1.5 1.5 3.2 1.5 5 0 2.2-.8 4.2-2.2 5.6L27 30h-7V8z" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M13.5 15c1.2.6 2.5.6 3.5 0" stroke="#c7d2fe" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+            <path d="M23 15c1.2.6 2.5.6 3.5 0" stroke="#c7d2fe" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+            <line x1="20" y1="9" x2="20" y2="29" stroke="#c7d2fe" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.4"/>
+            <line x1="11" y1="33.5" x2="29" y2="33.5" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="nav-logo-texts">
+          <span class="nav-logo-text">Aprendientes</span>
+          <span class="nav-logo-sub">APRENDE A APRENDER</span>
+        </div>
       </a>
       <ul class="nav-links">
-        <li><a href="#features">Características</a></li>
+        <li><a href="#features">Contenido</a></li>
         <li><a href="#how">Cómo funciona</a></li>
         <li><a href="#testimonials">Testimonios</a></li>
         <li><a href="#pricing">Precios</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#cta-final" class="btn btn-primary" style="padding:10px 20px;font-size:13px;">Solicitar demo <i class="ti ti-arrow-right"></i></a>
+        <a href="#pricing" class="btn btn-primary" style="padding:10px 20px;font-size:13px;">Ver cursos <i class="ti ti-arrow-right"></i></a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -993,11 +935,11 @@
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#features">Características</a>
+    <a href="#features">Contenido</a>
     <a href="#how">Cómo funciona</a>
     <a href="#testimonials">Testimonios</a>
     <a href="#pricing">Precios</a>
-    <a href="#cta-final" class="btn btn-primary">Solicitar demo gratuita</a>
+    <a href="#cta-final" class="btn btn-primary">Empieza gratis</a>
   </div>
 </nav>
 
@@ -1007,41 +949,40 @@
     <div class="hero-inner">
       <div class="hero-content reveal-left">
         <div class="hero-badge">
-          <i class="ti ti-shield-check"></i> Certificado LOPD/RGPD · Sector Sanitario
+          <i class="ti ti-brain"></i> Basado en ciencia cognitiva · Para adultos y estudiantes
         </div>
         <h1 class="hero-title">
-          El CRM que tu<br />
-          centro sanitario<br />
-          <span class="accent">estaba esperando</span>
+          Aprende a aprender<br />
+          <span class="accent">de verdad</span>
         </h1>
         <p class="hero-subtitle">
-          Gestiona pacientes, automatiza citas y mejora la experiencia asistencial. Diseñado para hospitales, clínicas y consultas médicas que quieren crecer sin perder el control.
+          Descubre los mecanismos que hacen posible el aprendizaje. Artículos, vídeos y cursos para que tomes el control de cómo aprendes.
         </p>
         <div class="hero-cta">
-          <a href="#cta-final" class="btn btn-primary" style="font-size:16px;padding:16px 32px;">
-            <i class="ti ti-calendar-event"></i> Solicitar demo gratuita
+          <a href="#pricing" class="btn btn-primary" style="font-size:16px;padding:16px 32px;">
+            <i class="ti ti-book"></i> Ver cursos
           </a>
-          <a href="#how" class="btn btn-outline">
-            Ver cómo funciona <i class="ti ti-arrow-right"></i>
+          <a href="#features" class="btn btn-outline">
+            Leer artículos gratis <i class="ti ti-arrow-right"></i>
           </a>
         </div>
         <div class="hero-stats">
           <div>
-            <div class="hero-stat-num">+400</div>
-            <div class="hero-stat-label">Centros activos</div>
+            <div class="hero-stat-num">+2.000</div>
+            <div class="hero-stat-label">Aprendientes</div>
           </div>
           <div>
-            <div class="hero-stat-num">98%</div>
-            <div class="hero-stat-label">Satisfacción</div>
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Cursos disponibles</div>
           </div>
           <div>
-            <div class="hero-stat-num">-35%</div>
-            <div class="hero-stat-label">No-shows en citas</div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Basado en evidencia</div>
           </div>
         </div>
       </div>
 
-      <!-- Mockup UI -->
+      <!-- Course cards mockup -->
       <div class="hero-mockup reveal-right">
         <div class="mockup-window">
           <div class="mockup-bar">
@@ -1050,67 +991,48 @@
               <div class="mockup-dot"></div>
               <div class="mockup-dot"></div>
             </div>
-            <div class="mockup-url">app.crmcare.es/dashboard</div>
+            <div class="mockup-url">aprendientes.es/cursos</div>
           </div>
-          <div class="mockup-body">
-            <div class="mockup-sidebar">
-              <div class="sidebar-icon active"><i class="ti ti-layout-dashboard"></i></div>
-              <div class="sidebar-icon"><i class="ti ti-users"></i></div>
-              <div class="sidebar-icon"><i class="ti ti-calendar"></i></div>
-              <div class="sidebar-icon"><i class="ti ti-message"></i></div>
-              <div class="sidebar-icon"><i class="ti ti-chart-bar"></i></div>
-              <div class="sidebar-icon" style="margin-top:auto"><i class="ti ti-settings"></i></div>
+          <div class="mockup-courses">
+            <div class="course-preview">
+              <div class="course-preview-icon" style="background:rgba(99,102,241,.2);">
+                <i class="ti ti-brain" style="color:#818cf8;"></i>
+              </div>
+              <div class="course-preview-info">
+                <div class="course-preview-title">Aprender a aprender para adultos</div>
+                <div class="course-preview-meta">8 módulos · 4.9 ★ · 312 alumnos</div>
+              </div>
+              <div class="course-preview-price">97€</div>
             </div>
-            <div class="mockup-content">
-              <div class="mockup-header">
-                <span class="mockup-title">Dashboard — Junio 2026</span>
-                <span class="mockup-badge-green"><i class="ti ti-circle-filled" style="font-size:8px"></i> En vivo</span>
+            <div class="course-preview">
+              <div class="course-preview-icon" style="background:rgba(16,185,129,.15);">
+                <i class="ti ti-school" style="color:#34d399;"></i>
               </div>
-              <div class="mockup-cards">
-                <div class="mockup-card">
-                  <div class="mc-label">Pacientes activos</div>
-                  <div class="mc-value">1.847</div>
-                  <div class="mc-change"><i class="ti ti-trending-up"></i> +12% este mes</div>
-                </div>
-                <div class="mockup-card">
-                  <div class="mc-label">Citas hoy</div>
-                  <div class="mc-value">34</div>
-                  <div class="mc-change"><i class="ti ti-check"></i> 28 confirmadas</div>
-                </div>
+              <div class="course-preview-info">
+                <div class="course-preview-title">Aprender a aprender para estudiantes</div>
+                <div class="course-preview-meta">6 módulos · 4.8 ★ · 541 alumnos</div>
               </div>
-              <div class="mockup-table">
-                <div class="mt-head">
-                  <span>Paciente</span><span>Próxima cita</span><span>Estado</span>
-                </div>
-                <div class="mt-row">
-                  <span class="mt-name">García Martínez, L.</span>
-                  <span class="mt-date">Hoy 10:30</span>
-                  <span class="mt-status status-confirmed">Confirmada</span>
-                </div>
-                <div class="mt-row">
-                  <span class="mt-name">Rodríguez Pérez, M.</span>
-                  <span class="mt-date">Hoy 11:00</span>
-                  <span class="mt-status status-pending">Pendiente</span>
-                </div>
-                <div class="mt-row">
-                  <span class="mt-name">López Sánchez, A.</span>
-                  <span class="mt-date">Mañana 09:15</span>
-                  <span class="mt-status status-scheduled">Agendada</span>
-                </div>
-                <div class="mt-row">
-                  <span class="mt-name">Fernández Ruiz, C.</span>
-                  <span class="mt-date">Mañana 10:00</span>
-                  <span class="mt-status status-confirmed">Confirmada</span>
-                </div>
+              <div class="course-preview-price">97€</div>
+            </div>
+            <div class="course-preview">
+              <div class="course-preview-icon" style="background:rgba(249,115,22,.12);">
+                <i class="ti ti-arrows-exchange" style="color:#f97316;"></i>
               </div>
+              <div class="course-preview-info">
+                <div class="course-preview-title">Desaprender para aprender</div>
+                <div class="course-preview-meta">5 módulos · 4.9 ★ · 198 alumnos</div>
+              </div>
+              <div class="course-preview-price">97€</div>
             </div>
           </div>
         </div>
         <div class="mockup-float">
-          <div class="float-icon"><i class="ti ti-trending-up"></i></div>
+          <div class="float-icon" style="background:rgba(249,115,22,.15);color:#f97316;">
+            <i class="ti ti-users"></i>
+          </div>
           <div>
-            <div class="float-label">Reducción de no-shows</div>
-            <div class="float-value">−35% este trimestre</div>
+            <div class="float-label">Comunidad activa</div>
+            <div class="float-value">+2.000 aprendientes</div>
           </div>
         </div>
       </div>
@@ -1118,46 +1040,16 @@
   </div>
 </section>
 
-<!-- ═══════════════ TRUST LOGOS ═══════════════ -->
+<!-- ═══════════════ TRUST ═══════════════ -->
 <section id="trust">
   <div class="container">
-    <p class="trust-label">Centros sanitarios que ya confían en CRM CARE</p>
+    <p class="trust-label">Temas que exploramos en Aprendientes</p>
     <div class="trust-logos reveal">
-      <div class="trust-logo">
-        <i class="ti ti-building-hospital"></i>
-        <div class="trust-logo-name">
-          <strong>Hospital Universitario</strong>
-          <span>Montecasino · Madrid</span>
-        </div>
-      </div>
-      <div class="trust-logo">
-        <i class="ti ti-stethoscope"></i>
-        <div class="trust-logo-name">
-          <strong>Clínica Salud+</strong>
-          <span>Barcelona</span>
-        </div>
-      </div>
-      <div class="trust-logo">
-        <i class="ti ti-heart-rate-monitor"></i>
-        <div class="trust-logo-name">
-          <strong>Centro Médico Norte</strong>
-          <span>Bilbao</span>
-        </div>
-      </div>
-      <div class="trust-logo">
-        <i class="ti ti-building-community"></i>
-        <div class="trust-logo-name">
-          <strong>Policlínica Levante</strong>
-          <span>Valencia</span>
-        </div>
-      </div>
-      <div class="trust-logo">
-        <i class="ti ti-microscope"></i>
-        <div class="trust-logo-name">
-          <strong>IML Diagnósticos</strong>
-          <span>Sevilla</span>
-        </div>
-      </div>
+      <div class="trust-tag"><i class="ti ti-brain"></i> Memoria</div>
+      <div class="trust-tag"><i class="ti ti-eye"></i> Atención</div>
+      <div class="trust-tag"><i class="ti ti-refresh"></i> Hábitos</div>
+      <div class="trust-tag"><i class="ti ti-zoom-question"></i> Metacognición</div>
+      <div class="trust-tag"><i class="ti ti-dna"></i> Neurociencia</div>
     </div>
   </div>
 </section>
@@ -1166,74 +1058,74 @@
 <section id="problem" class="section">
   <div class="container">
     <div class="text-center reveal">
-      <span class="section-label">El desafío sanitario</span>
+      <span class="section-label">El problema del aprendizaje</span>
       <h2 class="section-title">¿Te suena familiar?</h2>
-      <p class="section-subtitle">La gestión de pacientes en centros sanitarios sigue llena de fricciones evitables. CRM CARE las elimina.</p>
+      <p class="section-subtitle">Nadie nos enseña a aprender. Solo a memorizar. Eso tiene consecuencias.</p>
     </div>
     <div class="ps-grid">
       <div class="reveal-left">
         <div class="ps-col-title problem-title">
-          <i class="ti ti-circle-x" style="font-size:18px"></i> Sin CRM CARE
+          <i class="ti ti-circle-x" style="font-size:18px"></i> Cómo estudiamos sin saber estudiar
         </div>
         <div class="ps-item problem">
-          <div class="ps-item-icon"><i class="ti ti-calendar-off"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-clock-off"></i></div>
           <div class="ps-item-text">
-            <strong>Agendas saturadas y confusas</strong>
-            <p>Hojas de cálculo, post-its y llamadas perdidas. Los pacientes esperan semanas sin respuesta.</p>
+            <strong>Estudias muchas horas pero no retienes</strong>
+            <p>Más tiempo no significa más aprendizaje. Sin las técnicas correctas, el esfuerzo no se traduce en memoria duradera.</p>
           </div>
         </div>
         <div class="ps-item problem">
-          <div class="ps-item-icon"><i class="ti ti-folder-off"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-highlight"></i></div>
           <div class="ps-item-text">
-            <strong>Expedientes dispersos</strong>
-            <p>La historia clínica está en papel, en diferentes sistemas o peor aún, desactualizada.</p>
+            <strong>Repasas subrayando y crees que funciona</strong>
+            <p>El subrayado genera una falsa sensación de dominio. La ciencia lleva años demostrando que es una de las técnicas menos efectivas.</p>
           </div>
         </div>
         <div class="ps-item problem">
-          <div class="ps-item-icon"><i class="ti ti-message-off"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-plug-off"></i></div>
           <div class="ps-item-text">
-            <strong>Comunicación reactiva</strong>
-            <p>Solo se contacta al paciente cuando llama. No hay seguimiento proactivo post-consulta.</p>
+            <strong>Te bloqueas ante lo nuevo porque no encaja</strong>
+            <p>Sin aprender a desaprender, lo que ya sabes actúa como filtro y te impide integrar información que contradice tus esquemas previos.</p>
           </div>
         </div>
         <div class="ps-item problem">
-          <div class="ps-item-icon"><i class="ti ti-chart-off"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-school-off"></i></div>
           <div class="ps-item-text">
-            <strong>Sin visibilidad del negocio</strong>
-            <p>No sabes qué especialidades rinden más, ni cuántos pacientes no vuelven tras la primera visita.</p>
+            <strong>Nadie te enseñó a aprender, solo a memorizar</strong>
+            <p>El sistema educativo premia la reproducción de contenido, no la comprensión profunda ni la capacidad de aprender de forma autónoma.</p>
           </div>
         </div>
       </div>
       <div class="reveal-right">
         <div class="ps-col-title solution-title">
-          <i class="ti ti-circle-check" style="font-size:18px"></i> Con CRM CARE
+          <i class="ti ti-circle-check" style="font-size:18px"></i> Lo que cambia con Aprendientes
         </div>
         <div class="ps-item solution">
-          <div class="ps-item-icon"><i class="ti ti-calendar-check"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-repeat"></i></div>
           <div class="ps-item-text">
-            <strong>Agenda inteligente y automatizada</strong>
-            <p>Confirmaciones automáticas por WhatsApp, recordatorios 24h antes y cancelaciones gestionadas en tiempo real.</p>
+            <strong>Técnicas de recuperación activa que multiplican la retención</strong>
+            <p>El testing effect, el espaciado y la elaboración son métodos respaldados por décadas de investigación cognitiva.</p>
           </div>
         </div>
         <div class="ps-item solution">
-          <div class="ps-item-icon"><i class="ti ti-file-medical"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-microscope"></i></div>
           <div class="ps-item-text">
-            <strong>Expediente digital centralizado</strong>
-            <p>Todo el historial del paciente en un clic: visitas, diagnósticos, documentos y consentimientos firmados.</p>
+            <strong>Métodos basados en ciencia cognitiva, no en intuición</strong>
+            <p>Cada técnica que enseñamos viene respaldada por evidencia científica. Sin mitos, sin hacks vacíos.</p>
           </div>
         </div>
         <div class="ps-item solution">
-          <div class="ps-item-icon"><i class="ti ti-send"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-arrows-exchange-2"></i></div>
           <div class="ps-item-text">
-            <strong>Comunicación proactiva y multicanal</strong>
-            <p>Flujos automáticos de seguimiento post-consulta, campañas de revisión y recordatorios de tratamiento.</p>
+            <strong>Aprende a desaprender para hacer sitio a lo nuevo</strong>
+            <p>Identificar y revisar tus propios esquemas mentales es el primer paso para aprender de verdad.</p>
           </div>
         </div>
         <div class="ps-item solution">
-          <div class="ps-item-icon"><i class="ti ti-chart-arrows"></i></div>
+          <div class="ps-item-icon"><i class="ti ti-compass"></i></div>
           <div class="ps-item-text">
-            <strong>Analítica en tiempo real</strong>
-            <p>Dashboards con KPIs clave: tasa de retención, ocupación por especialidad, ingresos y satisfacción del paciente.</p>
+            <strong>Toma el control de tu propio proceso de aprendizaje</strong>
+            <p>Conviértete en un aprendiente autónomo que sabe cómo aprende, qué le funciona y cómo mejorar.</p>
           </div>
         </div>
       </div>
@@ -1241,50 +1133,50 @@
   </div>
 </section>
 
-<!-- ═══════════════ CARACTERÍSTICAS ═══════════════ -->
+<!-- ═══════════════ QUÉ ENCONTRARÁS ═══════════════ -->
 <section id="features" class="section">
   <div class="container">
     <div class="text-center reveal">
-      <span class="section-label">Funcionalidades</span>
-      <h2 class="section-title">Todo lo que necesitas,<br />en una sola plataforma</h2>
-      <p class="section-subtitle">Diseñado específicamente para los flujos de trabajo de centros sanitarios. Sin funciones innecesarias, sin curva de aprendizaje.</p>
+      <span class="section-label">Contenidos</span>
+      <h2 class="section-title">Qué encontrarás<br />en Aprendientes</h2>
+      <p class="section-subtitle">Todo lo que necesitas para transformar cómo aprendes, en distintos formatos y ritmos.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal" style="transition-delay:.05s">
-        <div class="feature-icon"><i class="ti ti-users-group"></i></div>
-        <div class="feature-title">Gestión de pacientes y expedientes</div>
-        <div class="feature-desc">Ficha completa de cada paciente con historial clínico, documentos adjuntos, consentimientos digitales y alertas de seguimiento.</div>
-        <span class="feature-tag">Historia clínica digital</span>
+        <div class="feature-icon"><i class="ti ti-article"></i></div>
+        <div class="feature-title">Artículos de divulgación</div>
+        <div class="feature-desc">Piezas profundas y bien documentadas sobre ciencia del aprendizaje, memoria, atención y metacognición. Lectura gratuita y sin paywalls.</div>
+        <span class="feature-tag">Acceso gratuito</span>
       </div>
       <div class="feature-card reveal" style="transition-delay:.1s">
-        <div class="feature-icon"><i class="ti ti-calendar-time"></i></div>
-        <div class="feature-title">Agenda y citas automatizadas</div>
-        <div class="feature-desc">Reserva online 24/7, confirmaciones automáticas, recordatorios multicanal y gestión de cancelaciones y listas de espera.</div>
-        <span class="feature-tag">Reducción no-shows −35%</span>
+        <div class="feature-icon"><i class="ti ti-book-2"></i></div>
+        <div class="feature-title">Cursos estructurados</div>
+        <div class="feature-desc">Programas completos con vídeos, ejercicios y materiales descargables. Diseñados para que apliques lo aprendido desde el primer módulo.</div>
+        <span class="feature-tag">De pago · Acceso de por vida</span>
       </div>
       <div class="feature-card reveal" style="transition-delay:.15s">
-        <div class="feature-icon"><i class="ti ti-activity-heartbeat"></i></div>
-        <div class="feature-title">Seguimiento post-consulta</div>
-        <div class="feature-desc">Flujos automáticos de seguimiento tras cada visita: encuestas de satisfacción, revisiones programadas y alertas de tratamiento.</div>
-        <span class="feature-tag">Fidelización del paciente</span>
+        <div class="feature-icon"><i class="ti ti-brand-youtube"></i></div>
+        <div class="feature-title">Vídeos cortos en YouTube</div>
+        <div class="feature-desc">Canal de YouTube con vídeos de 5 a 15 minutos sobre técnicas concretas, conceptos clave y casos prácticos de aprendizaje real.</div>
+        <span class="feature-tag">Gratuito · YouTube</span>
       </div>
       <div class="feature-card reveal" style="transition-delay:.2s">
-        <div class="feature-icon"><i class="ti ti-device-mobile-message"></i></div>
-        <div class="feature-title">Comunicación multicanal</div>
-        <div class="feature-desc">WhatsApp Business, email personalizado, SMS y notificaciones push. Todos los canales centralizados en una bandeja unificada.</div>
-        <span class="feature-tag">WhatsApp · Email · SMS</span>
+        <div class="feature-icon"><i class="ti ti-flask"></i></div>
+        <div class="feature-title">Técnicas basadas en evidencia</div>
+        <div class="feature-desc">Cada recurso está anclado en investigación científica. Citamos las fuentes, explicamos el porqué y mostramos cómo aplicarlo en tu contexto.</div>
+        <span class="feature-tag">Respaldado por ciencia</span>
       </div>
       <div class="feature-card reveal" style="transition-delay:.25s">
-        <div class="feature-icon"><i class="ti ti-chart-histogram"></i></div>
-        <div class="feature-title">Informes y analíticas</div>
-        <div class="feature-desc">Dashboards personalizables con KPIs sanitarios: ocupación, ingresos por especialidad, NPS, tasa de retención y mucho más.</div>
-        <span class="feature-tag">Decisiones basadas en datos</span>
+        <div class="feature-icon"><i class="ti ti-users-group"></i></div>
+        <div class="feature-title">Comunidad de aprendientes</div>
+        <div class="feature-desc">Espacio privado donde compartir avances, resolver dudas y conectar con otras personas comprometidas con aprender mejor.</div>
+        <span class="feature-tag">Acceso total</span>
       </div>
       <div class="feature-card reveal" style="transition-delay:.3s">
-        <div class="feature-icon"><i class="ti ti-lock-check"></i></div>
-        <div class="feature-title">Cumplimiento LOPD/RGPD</div>
-        <div class="feature-desc">Consentimientos digitales, registro de accesos, cifrado end-to-end y gestión de derechos del paciente. Auditado por expertos en compliance sanitario.</div>
-        <span class="feature-tag">Certificado RGPD</span>
+        <div class="feature-icon"><i class="ti ti-puzzle"></i></div>
+        <div class="feature-title">Retos y ejercicios prácticos</div>
+        <div class="feature-desc">No basta con saber la teoría. Cada curso incluye retos semanales para que practiques las técnicas y veas resultados reales desde el principio.</div>
+        <span class="feature-tag">Aprende haciendo</span>
       </div>
     </div>
   </div>
@@ -1295,38 +1187,38 @@
   <div class="container">
     <div class="text-center reveal">
       <span class="section-label">Proceso</span>
-      <h2 class="section-title">En marcha en menos de 48 horas</h2>
-      <p class="section-subtitle" style="color:rgba(255,255,255,.65)">Nuestro equipo de onboarding te acompaña en cada paso. Sin instalaciones, sin servidores propios.</p>
+      <h2 class="section-title">Cómo funciona Aprendientes</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,.6)">Tres pasos para pasar de estudiar sin rumbo a aprender con propósito.</p>
     </div>
     <div class="steps-grid">
       <div class="step-card reveal" style="transition-delay:.05s">
         <div class="step-num">1</div>
-        <div class="step-title">Configura tu centro</div>
-        <div class="step-desc">Personalizamos CRM CARE con las especialidades, profesionales y flujos de trabajo de tu centro.</div>
+        <div class="step-title">Lee y descubre</div>
+        <div class="step-desc">Accede gratis a artículos y vídeos sobre ciencia del aprendizaje. Descubre qué está pasando en tu cabeza cuando estudias.</div>
         <ul class="step-features">
-          <li><i class="ti ti-check"></i> Alta en menos de 1 hora</li>
-          <li><i class="ti ti-check"></i> Configuración guiada</li>
-          <li><i class="ti ti-check"></i> Sin necesidad de IT</li>
+          <li><i class="ti ti-check"></i> Artículos gratuitos sin límite</li>
+          <li><i class="ti ti-check"></i> Vídeos en YouTube</li>
+          <li><i class="ti ti-check"></i> Newsletter semanal</li>
         </ul>
       </div>
       <div class="step-card reveal" style="transition-delay:.1s">
         <div class="step-num">2</div>
-        <div class="step-title">Importa tus datos</div>
-        <div class="step-desc">Migramos tu base de pacientes desde cualquier sistema: Excel, Gestor Clínico, HIS o agenda de papel.</div>
+        <div class="step-title">Elige tu curso</div>
+        <div class="step-desc">Selecciona el curso que mejor se adapta a tu perfil: adulto, estudiante o profesional. Cada programa está diseñado para tu contexto real.</div>
         <ul class="step-features">
-          <li><i class="ti ti-check"></i> Migración asistida</li>
-          <li><i class="ti ti-check"></i> Cero pérdida de datos</li>
-          <li><i class="ti ti-check"></i> Validación antes del paso a producción</li>
+          <li><i class="ti ti-check"></i> Curso para adultos</li>
+          <li><i class="ti ti-check"></i> Curso para estudiantes</li>
+          <li><i class="ti ti-check"></i> Desaprender para aprender</li>
         </ul>
       </div>
       <div class="step-card reveal" style="transition-delay:.15s">
         <div class="step-num">3</div>
-        <div class="step-title">Empieza a gestionar</div>
-        <div class="step-desc">Tu equipo accede desde cualquier dispositivo. Formación en vivo incluida y soporte dedicado los primeros 30 días.</div>
+        <div class="step-title">Transforma cómo aprendes</div>
+        <div class="step-desc">Aplica las técnicas, mide tu progreso y conviértete en tu propio maestro. El aprendizaje autónomo es una habilidad que se entrena.</div>
         <ul class="step-features">
-          <li><i class="ti ti-check"></i> App web y móvil</li>
-          <li><i class="ti ti-check"></i> Formación en vivo incluida</li>
-          <li><i class="ti ti-check"></i> Soporte 24/7 en español</li>
+          <li><i class="ti ti-check"></i> Ejercicios prácticos semanales</li>
+          <li><i class="ti ti-check"></i> Soporte por email</li>
+          <li><i class="ti ti-check"></i> Comunidad privada</li>
         </ul>
       </div>
     </div>
@@ -1338,43 +1230,43 @@
   <div class="container">
     <div class="text-center reveal">
       <span class="section-label">Testimonios</span>
-      <h2 class="section-title">Casos de éxito reales</h2>
-      <p class="section-subtitle">Directores médicos y administradores de centros sanitarios comparten su experiencia con CRM CARE.</p>
+      <h2 class="section-title">Lo que dicen quienes<br />ya aprenden diferente</h2>
+      <p class="section-subtitle">Personas reales que cambiaron su relación con el aprendizaje.</p>
     </div>
     <div class="testimonials-grid">
       <div class="testi-card reveal" style="transition-delay:.05s">
         <div class="testi-quote">"</div>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Desde que implantamos CRM CARE, nuestras ausencias en consulta bajaron un 38%. El sistema de recordatorios por WhatsApp ha cambiado completamente la relación con nuestros pacientes. El ROI se vio en el primer trimestre.</p>
+        <p class="testi-text">Llevaba años estudiando muchas horas y sintiendo que no avanzaba. El curso de adultos me cambió la perspectiva completamente. Ahora estudio la mitad de tiempo y retengo el doble. La recuperación espaciada es una revelación.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg,#2D7DD2,#0A2540)">DM</div>
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#6366f1,#1e1b4b)">MR</div>
           <div>
-            <div class="testi-name">Dra. Mercedes Villanueva</div>
-            <div class="testi-role">Directora Médica — Policlínica Levante, Valencia</div>
+            <div class="testi-name">Marta Robles</div>
+            <div class="testi-role">Opositora · Curso "Aprender a aprender para adultos"</div>
           </div>
         </div>
       </div>
       <div class="testi-card reveal" style="transition-delay:.1s">
         <div class="testi-quote">"</div>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">La integración con WhatsApp y el módulo de analíticas nos dieron una visión que nunca habíamos tenido. Ahora sabemos exactamente qué especialidades están rindiendo y podemos tomar decisiones de contratación basadas en datos reales.</p>
+        <p class="testi-text">Pensaba que era malo para memorizar. Resulta que simplemente usaba malas técnicas. Después de los primeros dos módulos ya noté la diferencia en mis exámenes. Ojalá hubiera encontrado esto en la carrera.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg,#059669,#0A2540)">RG</div>
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#f97316,#1e1b4b)">DG</div>
           <div>
-            <div class="testi-name">Roberto García Ibáñez</div>
-            <div class="testi-role">Director General — Hospital Universitario Montecasino</div>
+            <div class="testi-name">Diego García</div>
+            <div class="testi-role">Estudiante de Medicina · Curso "Para estudiantes"</div>
           </div>
         </div>
       </div>
       <div class="testi-card reveal" style="transition-delay:.15s">
         <div class="testi-quote">"</div>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">La implementación fue mucho más sencilla de lo esperado. En 48 horas el equipo ya estaba funcionando. El soporte en español y la formación personalizada marcaron la diferencia. Clínica Salud+ ha mejorado su NPS en 22 puntos.</p>
+        <p class="testi-text">Empecé leyendo los artículos gratuitos y me enganché. El curso de "Desaprender" me ayudó a entender por qué me costaba tanto adaptarme a nuevas metodologías en el trabajo. Ahora soy mucho más flexible mentalmente.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg,#7c3aed,#0A2540)">LP</div>
+          <div class="testi-avatar" style="background: linear-gradient(135deg,#10b981,#1e1b4b)">LF</div>
           <div>
-            <div class="testi-name">Laura Puig Castells</div>
-            <div class="testi-role">Administradora — Clínica Salud+, Barcelona</div>
+            <div class="testi-name">Laura Fernández</div>
+            <div class="testi-role">Directora de producto · Curso "Desaprender para aprender"</div>
           </div>
         </div>
       </div>
@@ -1387,77 +1279,75 @@
   <div class="container">
     <div class="text-center reveal">
       <span class="section-label">Precios</span>
-      <h2 class="section-title">Planes adaptados a tu centro</h2>
-      <p class="section-subtitle">Sin permanencia. Sin costes ocultos. Cancela cuando quieras. Prueba gratuita 14 días en todos los planes.</p>
+      <h2 class="section-title">Elige tu forma de aprender</h2>
+      <p class="section-subtitle">Sin permanencia. Sin costes ocultos. Empieza gratis cuando quieras.</p>
     </div>
     <div class="pricing-grid">
-      <!-- BÁSICO -->
+      <!-- GRATUITO -->
       <div class="pricing-card reveal" style="transition-delay:.05s">
-        <div class="plan-name">Básico</div>
-        <div class="plan-desc">Ideal para consultas y clínicas pequeñas</div>
+        <div class="plan-name">Gratuito</div>
+        <div class="plan-desc">Para descubrir Aprendientes sin compromiso</div>
         <div class="plan-price">
           <span class="plan-price-cur">€</span>
-          <span class="plan-price-num">79</span>
+          <span class="plan-price-num">0</span>
         </div>
-        <div class="plan-price-period">/ mes · hasta 3 profesionales</div>
+        <div class="plan-price-period">Para siempre gratis</div>
         <hr class="plan-divider" />
         <ul class="plan-features">
-          <li><i class="ti ti-check"></i> Hasta 500 pacientes activos</li>
-          <li><i class="ti ti-check"></i> Agenda y citas online</li>
-          <li><i class="ti ti-check"></i> Recordatorios por email y SMS</li>
-          <li><i class="ti ti-check"></i> Expediente digital básico</li>
-          <li><i class="ti ti-check"></i> Soporte por email</li>
-          <li class="disabled"><i class="ti ti-x"></i> WhatsApp Business</li>
-          <li class="disabled"><i class="ti ti-x"></i> Analíticas avanzadas</li>
-          <li class="disabled"><i class="ti ti-x"></i> API e integraciones</li>
+          <li><i class="ti ti-check"></i> Artículos de divulgación ilimitados</li>
+          <li><i class="ti ti-check"></i> Vídeos en YouTube</li>
+          <li><i class="ti ti-check"></i> Newsletter semanal</li>
+          <li><i class="ti ti-check"></i> Acceso a la comunidad básica</li>
+          <li class="disabled"><i class="ti ti-x"></i> Cursos estructurados</li>
+          <li class="disabled"><i class="ti ti-x"></i> Ejercicios y materiales</li>
+          <li class="disabled"><i class="ti ti-x"></i> Soporte por email</li>
         </ul>
-        <a href="#cta-final" class="btn btn-dark plan-btn">Empezar gratis 14 días</a>
+        <a href="#cta-final" class="btn btn-dark plan-btn">Empezar gratis</a>
       </div>
 
-      <!-- PROFESIONAL (destacado) -->
+      <!-- CURSO INDIVIDUAL -->
       <div class="pricing-card popular reveal" style="transition-delay:.1s">
         <div class="popular-badge">⭐ Más popular</div>
-        <div class="plan-name">Profesional</div>
-        <div class="plan-desc" style="color:rgba(255,255,255,.5)">Para clínicas medianas en crecimiento</div>
+        <div class="plan-name">Curso individual</div>
+        <div class="plan-desc" style="color:rgba(255,255,255,.5)">Para quien quiere transformar cómo aprende</div>
         <div class="plan-price">
           <span class="plan-price-cur" style="color:white">€</span>
-          <span class="plan-price-num">199</span>
+          <span class="plan-price-num">97</span>
         </div>
-        <div class="plan-price-period">/ mes · hasta 15 profesionales</div>
+        <div class="plan-price-period">Pago único · Acceso de por vida</div>
         <hr class="plan-divider" />
         <ul class="plan-features">
-          <li><i class="ti ti-check"></i> Pacientes ilimitados</li>
-          <li><i class="ti ti-check"></i> Agenda multirecurso avanzada</li>
-          <li><i class="ti ti-check"></i> WhatsApp Business integrado</li>
-          <li><i class="ti ti-check"></i> Expediente digital completo</li>
-          <li><i class="ti ti-check"></i> Analíticas y dashboards</li>
-          <li><i class="ti ti-check"></i> Seguimiento post-consulta</li>
-          <li><i class="ti ti-check"></i> Soporte telefónico prioritario</li>
-          <li class="disabled"><i class="ti ti-x"></i> API personalizada</li>
+          <li><i class="ti ti-check"></i> Todo lo del plan gratuito</li>
+          <li><i class="ti ti-check"></i> Acceso a un curso completo</li>
+          <li><i class="ti ti-check"></i> Ejercicios y materiales descargables</li>
+          <li><i class="ti ti-check"></i> Soporte por email</li>
+          <li><i class="ti ti-check"></i> Acceso de por vida al curso</li>
+          <li><i class="ti ti-check"></i> Actualizaciones incluidas</li>
+          <li class="disabled"><i class="ti ti-x"></i> Comunidad privada premium</li>
         </ul>
-        <a href="#cta-final" class="btn btn-primary plan-btn">Solicitar demo</a>
+        <a href="#cta-final" class="btn btn-primary plan-btn">Elegir curso</a>
       </div>
 
-      <!-- ENTERPRISE -->
+      <!-- ACCESO TOTAL -->
       <div class="pricing-card reveal" style="transition-delay:.15s">
-        <div class="plan-name">Enterprise</div>
-        <div class="plan-desc">Para hospitales y grupos sanitarios</div>
+        <div class="plan-name">Acceso total</div>
+        <div class="plan-desc">Para aprendientes comprometidos con el largo plazo</div>
         <div class="plan-price">
-          <span class="plan-price-num" style="font-size:36px;color:var(--navy)">A medida</span>
+          <span class="plan-price-cur">€</span>
+          <span class="plan-price-num">197</span>
         </div>
-        <div class="plan-price-period">Contacta con nuestro equipo</div>
+        <div class="plan-price-period">/ año · Todos los cursos</div>
         <hr class="plan-divider" />
         <ul class="plan-features">
-          <li><i class="ti ti-check"></i> Profesionales ilimitados</li>
-          <li><i class="ti ti-check"></i> Multi-sede y multi-especialidad</li>
-          <li><i class="ti ti-check"></i> API e integraciones HIS/HCE</li>
-          <li><i class="ti ti-check"></i> SSO / Active Directory</li>
-          <li><i class="ti ti-check"></i> Informes regulatorios automáticos</li>
-          <li><i class="ti ti-check"></i> SLA garantizado 99.9%</li>
-          <li><i class="ti ti-check"></i> Gestor de cuenta dedicado</li>
-          <li><i class="ti ti-check"></i> Implantación in-situ</li>
+          <li><i class="ti ti-check"></i> Todo lo del plan curso individual</li>
+          <li><i class="ti ti-check"></i> Todos los cursos actuales y futuros</li>
+          <li><i class="ti ti-check"></i> Comunidad privada de aprendientes</li>
+          <li><i class="ti ti-check"></i> Sesiones en directo</li>
+          <li><i class="ti ti-check"></i> Nuevos contenidos cada mes</li>
+          <li><i class="ti ti-check"></i> Acceso anticipado a novedades</li>
+          <li><i class="ti ti-check"></i> Soporte prioritario</li>
         </ul>
-        <a href="#cta-final" class="btn btn-dark plan-btn">Hablar con ventas</a>
+        <a href="#cta-final" class="btn btn-dark plan-btn">Quiero acceso total</a>
       </div>
     </div>
   </div>
@@ -1467,61 +1357,39 @@
 <section id="cta-final" class="section">
   <div class="container">
     <div class="text-center reveal">
-      <span class="section-label">Empieza hoy</span>
-      <h2 class="section-title">Tu centro sanitario<br />merece la mejor gestión</h2>
-      <p class="section-subtitle">Únete a más de 400 centros sanitarios que ya han transformado su gestión. Demo personalizada en 30 minutos, sin compromiso.</p>
+      <span class="section-label">Empieza gratis hoy</span>
+      <h2 class="section-title">La semana que viene<br />podrías aprender diferente</h2>
+      <p class="section-subtitle">Suscríbete y recibe cada semana un artículo sobre ciencia del aprendizaje.</p>
     </div>
 
     <div class="cta-form-wrap reveal">
       <div id="formContent">
-        <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px;text-align:center">Solicita tu demo gratuita</h3>
-        <p style="font-size:14px;color:var(--gray-400);text-align:center;margin-bottom:28px">Te contactamos en menos de 2 horas en horario laboral</p>
+        <h3 style="font-size:20px;font-weight:800;color:#e0e7ff;margin-bottom:6px;text-align:center">Empieza gratis hoy</h3>
+        <p style="font-size:14px;color:#a5b4fc;text-align:center;margin-bottom:28px">Un artículo cada semana. Sin spam. Cancela cuando quieras.</p>
         <form id="demoForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Nombre y apellidos <span>*</span></label>
-              <input type="text" class="form-control" id="fname" placeholder="Ej: Ana García López" />
-              <div class="form-error" id="err-fname">Por favor, introduce tu nombre completo</div>
-            </div>
-            <div class="form-group">
-              <label>Email profesional <span>*</span></label>
-              <input type="email" class="form-control" id="femail" placeholder="ana@clinica.es" />
-              <div class="form-error" id="err-femail">Introduce un email válido</div>
-            </div>
+          <div class="form-group">
+            <label>Nombre <span>*</span></label>
+            <input type="text" class="form-control" id="fname" placeholder="¿Cómo te llamas?" />
+            <div class="form-error" id="err-fname">Por favor, introduce tu nombre</div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Teléfono <span>*</span></label>
-              <input type="tel" class="form-control" id="fphone" placeholder="+34 600 000 000" />
-              <div class="form-error" id="err-fphone">Introduce un teléfono válido</div>
-            </div>
-            <div class="form-group">
-              <label>Tipo de centro <span>*</span></label>
-              <select class="form-control" id="ftype">
-                <option value="">Selecciona una opción</option>
-                <option value="hospital">Hospital</option>
-                <option value="clinica">Clínica privada</option>
-                <option value="consulta">Consulta médica</option>
-                <option value="centro-salud">Centro de salud</option>
-                <option value="dental">Clínica dental</option>
-                <option value="otro">Otro</option>
-              </select>
-              <div class="form-error" id="err-ftype">Selecciona el tipo de centro</div>
-            </div>
+          <div class="form-group">
+            <label>Email <span>*</span></label>
+            <input type="email" class="form-control" id="femail" placeholder="tu@email.com" />
+            <div class="form-error" id="err-femail">Introduce un email válido</div>
           </div>
-          <button type="submit" class="btn btn-primary form-submit">
-            <i class="ti ti-calendar-event"></i> Reservar demo gratuita
+          <button type="submit" class="btn form-submit">
+            <i class="ti ti-sparkles"></i> Quiero aprender mejor
           </button>
           <p class="form-privacy">
-            Al enviar este formulario aceptas nuestra <a href="#">Política de privacidad</a>.
-            Tus datos están protegidos bajo la normativa RGPD.
+            Al suscribirte aceptas nuestra <a href="#">Política de privacidad</a>.
+            Puedes darte de baja en cualquier momento.
           </p>
         </form>
       </div>
       <div class="form-success" id="formSuccess">
         <div class="form-success-icon"><i class="ti ti-circle-check"></i></div>
-        <h3>¡Solicitud recibida!</h3>
-        <p>Nuestro equipo te contactará en menos de 2 horas para coordinar tu demo personalizada. Revisa tu bandeja de entrada.</p>
+        <h3>¡Ya eres aprendiente!</h3>
+        <p>Revisa tu bandeja de entrada. Te llegará el primer artículo esta semana. Bienvenido al camino de aprender de verdad.</p>
       </div>
     </div>
   </div>
@@ -1533,58 +1401,67 @@
     <div class="footer-grid">
       <div>
         <a href="#" class="nav-logo" style="text-decoration:none">
-          <div class="nav-logo-icon"><i class="ti ti-heart-rate-monitor"></i></div>
-          <span class="nav-logo-text">CRM<span>CARE</span></span>
+          <div class="nav-logo-icon">
+            <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 8C17 8 14.5 10 13 12.5c-1 1.5-1.5 3.2-1.5 5 0 2.2.8 4.2 2.2 5.6L13 30h7V8z" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M20 8C23 8 25.5 10 27 12.5c1 1.5 1.5 3.2 1.5 5 0 2.2-.8 4.2-2.2 5.6L27 30h-7V8z" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <line x1="20" y1="9" x2="20" y2="29" stroke="#c7d2fe" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.4"/>
+              <line x1="11" y1="33.5" x2="29" y2="33.5" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="nav-logo-texts">
+            <span class="nav-logo-text">Aprendientes</span>
+            <span class="nav-logo-sub">APRENDE A APRENDER</span>
+          </div>
         </a>
-        <p class="footer-brand-desc">El CRM especializado para el sector sanitario. Ayudamos a hospitales, clínicas y consultas a gestionar mejor, fidelizar pacientes y crecer de forma sostenible.</p>
+        <p class="footer-brand-desc">Proyecto educativo dedicado a la ciencia del aprendizaje. Artículos, vídeos y cursos para que tomes el control de cómo aprendes.</p>
         <div class="footer-social">
-          <a href="#" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
-          <a href="#" aria-label="Twitter"><i class="ti ti-brand-twitter"></i></a>
           <a href="#" aria-label="YouTube"><i class="ti ti-brand-youtube"></i></a>
           <a href="#" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="ti ti-brand-x"></i></a>
+          <a href="#" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Producto</div>
+        <div class="footer-col-title">Contenido</div>
         <ul class="footer-links">
-          <li><a href="#features">Características</a></li>
-          <li><a href="#pricing">Precios</a></li>
-          <li><a href="#">Integraciones</a></li>
-          <li><a href="#">Novedades</a></li>
-          <li><a href="#">Hoja de ruta</a></li>
+          <li><a href="#features">Artículos</a></li>
+          <li><a href="#">Vídeos</a></li>
+          <li><a href="#pricing">Cursos</a></li>
+          <li><a href="#">Podcast</a></li>
+          <li><a href="#cta-final">Newsletter</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Empresa</div>
+        <div class="footer-col-title">Aprende</div>
         <ul class="footer-links">
-          <li><a href="#">Sobre nosotros</a></li>
-          <li><a href="#">Blog sanitario</a></li>
-          <li><a href="#">Casos de éxito</a></li>
-          <li><a href="#">Partners</a></li>
-          <li><a href="#">Trabaja con nosotros</a></li>
+          <li><a href="#">Sobre el método</a></li>
+          <li><a href="#">Para estudiantes</a></li>
+          <li><a href="#">Para adultos</a></li>
+          <li><a href="#">Para empresas</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Soporte</div>
+        <div class="footer-col-title">Comunidad</div>
         <ul class="footer-links">
-          <li><a href="#">Centro de ayuda</a></li>
-          <li><a href="#">Documentación API</a></li>
-          <li><a href="#">Estado del sistema</a></li>
+          <li><a href="#">Canal YouTube</a></li>
+          <li><a href="#">Grupo Telegram</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Afiliados</a></li>
           <li><a href="#">Contacto</a></li>
-          <li><a href="#cta-final">Solicitar demo</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 CRM CARE. Todos los derechos reservados.</div>
+      <div class="footer-copy">© 2026 Aprendientes. Todos los derechos reservados.</div>
       <div class="footer-legal">
         <a href="#">Aviso legal</a>
         <a href="#">Privacidad</a>
         <a href="#">Cookies</a>
-        <a href="#">RGPD</a>
       </div>
       <div class="footer-cert">
-        <i class="ti ti-shield-check"></i> Certificado LOPD/RGPD · ENS Medio
+        <i class="ti ti-heart"></i> Hecho con pasión por el aprendizaje
       </div>
     </div>
   </div>
@@ -1648,23 +1525,15 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   }
 
-  function validatePhone(val) {
-    return /^[+]?[\d\s\-().]{7,}$/.test(val.trim());
-  }
-
   form.addEventListener('submit', e => {
     e.preventDefault();
     let valid = true;
 
     const name = document.getElementById('fname').value.trim();
     const email = document.getElementById('femail').value.trim();
-    const phone = document.getElementById('fphone').value.trim();
-    const type = document.getElementById('ftype').value;
 
-    if (name.length < 3) { showError('name', true); valid = false; } else showError('name', false);
+    if (name.length < 2) { showError('name', true); valid = false; } else showError('name', false);
     if (!validateEmail(email)) { showError('email', true); valid = false; } else showError('email', false);
-    if (!validatePhone(phone)) { showError('phone', true); valid = false; } else showError('phone', false);
-    if (!type) { showError('type', true); valid = false; } else showError('type', false);
 
     if (valid) {
       formContent.style.display = 'none';
@@ -1672,12 +1541,11 @@
     }
   });
 
-  // Clear errors on input
-  ['fname','femail','fphone','ftype'].forEach(id => {
+  ['fname', 'femail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', () => {
       el.classList.remove('error');
-      const errKey = id.replace('f','');
+      const errKey = id.replace('f', '');
       const errEl = document.getElementById('err-' + errKey);
       if (errEl) errEl.classList.remove('show');
     });
